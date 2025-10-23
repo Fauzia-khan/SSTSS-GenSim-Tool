@@ -1,4 +1,4 @@
-# SSTSS-Tool
+# SSTSS-GenSim Tool
 
 
 **SSTSS** -- Simulation-based Safety Testing Scenario Selection process is a scenario selection tool for prioritizing and selecting test scenarios for simulation-based safety testing of ADS.
