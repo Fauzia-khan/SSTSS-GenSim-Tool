@@ -1,0 +1,76 @@
+
+        '''
+        subprocess.Popen([
+            'gnome-terminal',
+            '--',
+            'bash', '--login', '-c',
+            'source /opt/ros/noetic/setup.bash && ./generate_simulation.sh; exec bash'
+        ])
+        '''
+
+        # 1. Carla'yı başlat
+
+        # 1. Carla'yı başlat (dizin ismini düzelttik!)
+        '''subprocess.Popen([
+            'gnome-terminal',
+            '--',
+            'bash', '-c',
+            'cd /home/laima/Documents/CARLA_0.9.13 && bash CarlaUE4.sh -prefernvidia; exec bash'
+
+        ])
+
+        # Carla'nın biraz açılmasını bekle
+        time.sleep(20)
+
+        # 2. Scenario Runner'ı başlat
+        import subprocess
+        '''
+
+        # 3. ROS launch (autoware)
+        #subprocess.Popen([
+        #    'gnome-terminal', '--', 'bash', '-c',
+        #    'deactivate && roslaunch autoware_mini start_carla.launch map_name:=Town01 generate_traffic:=false; exec bash'
+        #])
+
+        """subprocess.Popen([
+            'terminator', '-e',
+            'bash -c "source /opt/ros/noetic/setup.bash && roslaunch autoware_mini start_carla.launch map_name:=Town01 generate_traffic:=false; exec bash"'
+        ])"""
+
+        '''subprocess.Popen([
+                'terminator', '-e',
+                'bash -c "source /opt/ros/noetic/setup.bash && source ~/Documents/autoware_mini_ws/devel/setup.bash && roslaunch autoware_mini start_carla.launch map_name:=Town01 generate_traffic:=false; exec bash"'
+            ])
+
+        time.sleep(5)
+
+        '''
+"""
+        # Path to the template
+        template_file_path = os.path.join(os.getcwd(), 'scenario_python_template.py')
+
+        # Output file path
+        GeneratedScenario = os.path.join(os.getcwd(), 'generated_scenario')
+        if not os.path.exists(GeneratedScenario):
+            os.makedirs(GeneratedScenario)
+        output_file_path = os.path.join(GeneratedScenario, 'generated_scenario.py')
+
+        try:
+            # Read the template file
+            with open(template_file_path, 'r') as template_file:
+                template_content = template_file.read()
+
+            # Replace the placeholders with selected values
+            modified_content = template_content.replace('<EGO_VEHICLE_VELOCITY>', ego_vehicle_speed)
+            modified_content = modified_content.replace('<OTHER_VEHICLE_VELOCITY>', other_vehicle_speed)
+            modified_content = modified_content.replace('<TIMEOUT>', timeout)
+
+            # Save the modified content to a new Python file
+            with open(output_file_path, 'w') as output_file:
+                output_file.write(modified_content)
+
+            # Show success message
+            QMessageBox.information(self, "Success", "Scenario Python file generated successfully!")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An error occurred: {str(e)}")
+"""
