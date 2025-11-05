@@ -26,9 +26,8 @@
 
 ## Screenshot
 
-![Main Window](InterfaceProject/images/Main_WIndow.png)
 <p align="center">
-  <img src="interfaceproject/images/mainwindow.png" alt="Main Window" width="600">
+  <img src="InterfaceProject/images/Main_WIndow.png" alt="Main Window" width="600">
 </p>
 
 ## Workflow
