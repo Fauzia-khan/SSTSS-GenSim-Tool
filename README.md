@@ -24,7 +24,7 @@
 
 ---
 
-## Screenshot
+## GUI for the Scenario Selection Module
 
 <p align="center">
   <img src="InterfaceProject/images/Main_WIndow.png" alt="Main Window" width="600">
