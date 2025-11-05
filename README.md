@@ -26,7 +26,7 @@
 
 ## Screenshot
 
-![SSTSS Main Window](assets/sstss_main.png)  
+![Main Window](interfaceproject/images/Main_Window.png)
 
 ## Workflow
 
