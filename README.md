@@ -26,7 +26,7 @@
 
 ## Screenshot
 
-![Main Window](interfaceproject/images/Main_Window.png)
+![Main Window](interfaceproject/images/Main_WIndow.png)
 
 ## Workflow
 
