@@ -24,9 +24,11 @@
 
 ---
 
-## Screenshot
+## GUI for the Scenario Selection Module
 
-![SSTSS Main Window](assets/sstss_main.png)  
+<p align="center">
+  <img src="InterfaceProject/images/Main_WIndow.png" alt="Main Window" width="600">
+</p>
 
 ## Workflow
 
