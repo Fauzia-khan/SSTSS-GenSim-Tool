@@ -11,7 +11,7 @@ from openpyxl.reader.excel import load_workbook
 from add_scenario import AddScenarioWindow
 from constants import scenarios_excel_file_name
 from view_scenario_window import ViewScenariosWindow
-from view_all_scenario_window import ViewAllScenariosWindow
+from view_all_catalog_scenario_window import ViewAllScenariosWindow
 from select_odd_window import SelectODDWindow
 from select_scenarios_basedOn_ODD import SelectScenariosBasedOnOdd
 from scenario_grouping import formulate_scenario_groups
@@ -165,6 +165,8 @@ class ScenarioDatabaseApp(QWidget):
     def view_all_scenarios(self):
         self.view_all_window = ViewAllScenariosWindow()
         self.view_all_window.exec_()
+    def formulate_scenario_groups_function(self):
+        formulate_scenario_groups()
 
     def remove_duplicates_function(self):
         QMessageBox.information(self, "Info", "Remove duplicates functionality will be added soon.")
@@ -178,8 +180,7 @@ class ScenarioDatabaseApp(QWidget):
     def select_scenarios_based_on_odd_function(self):
         self.select_scenario_odd = SelectScenariosBasedOnOdd()
 
-    def formulate_scenario_groups_function(self):
-        formulate_scenario_groups()
+
 
     def prioritize_scenario_groups_function(self):
         #prioritize_scenario_groups()
@@ -352,7 +353,8 @@ class ScenarioDatabaseApp(QWidget):
 
         # Close the simulator window
         self.simulator_window.close()
-
+        dataset_name = "us"  # <---- choose or pass your dataset name here
+        filter_scenarios_based_on_simulator(selected_simulator, dataset_name)
         # Show a progress/loading dialog
         progress = QProgressDialog("Selecting scenarios in progress...", None, 0, 0, self)
         progress.setWindowModality(Qt.ApplicationModal)
@@ -458,43 +460,3 @@ if __name__ == '__main__':
 
 
 
-#
-        # # FORMULATE SCENARIO GROUPS BUTTON
-        # self.formulate_scenario_button = QPushButton('4. Assign Scenarios to Scenario Groups', self)
-        # self.formulate_scenario_button.setFixedSize(300, 45)
-        # self.formulate_scenario_button.clicked.connect(self.formulate_scenario_groups_function)
-        # self.formulate_scenario_button.move(400, 350)
-        # #down_layout.addWidget(self.formulate_scenario_button)
-    # FORMULATE SCENARIO GROUPS BUTTON
-    ''' self.formulate_scenario_button = QPushButton('2. Assign Scenarios to Scenario Groups', self)
-    self.formulate_scenario_button.setFixedSize(300, 45)
-    self.formulate_scenario_button.clicked.connect(self.formulate_scenario_groups_function)
-    self.formulate_scenario_button.move(400, 250)
-
-    self.remove_duplicates_button = QPushButton('3. Remove Duplicates', self)
-    self.remove_duplicates_button.setFixedSize(240, 45)
-    self.remove_duplicates_button.clicked.connect(self.remove_duplicates_function)
-    self.remove_duplicates_button.move(430, 300)
-    down_layout = QHBoxLayout()
-    self.select_scenario_odd_button = QPushButton('5. Select Scenarios Based On ODD', self)
-    self.select_scenario_odd_button.setFixedSize(300, 45)
-    self.select_scenario_odd_button.clicked.connect(self.select_scenarios_based_on_odd_function)
-    self.select_scenario_odd_button.move(400, 400)
-    main_layout.addLayout(down_layout)
-
-    self.setLayout(main_layout)
-    
-    
-    '''
-'''
-        self.selected_scenario_button = QPushButton('8. Selected Scenarios', self)
-        self.selected_scenario_button.setFixedSize(180, 40)
-        self.selected_scenario_button.move(150, 300)
-        #self.selected_scenario_button.clicked.connect(self.open_scenario_selector)
-        self.selected_scenario_button.clicked.connect(self.run_select_scenarios)
-
-        self.add_button = QPushButton('Add Scenario', self)
-        self.add_button.setFixedSize(140, 40)
-        self.add_button.move(140, 330)
-        self.add_button.clicked.connect(self.add_scenario)
-        '''

@@ -8,7 +8,7 @@ def filter_scenarios_based_on_simulator(simulator_name, dataset_name):
     # Load the Excel file into a pandas DataFrame
     dataset_name = dataset_name.lower()
 
-    df = pd.read_excel(os.getcwd() + "/prioritized_scenarios_" + dataset_name + ".xlsx")
+    df = pd.read_excel(os.getcwd() + f"/prioritized_scenario_groups_{dataset_name}.xlsx")
 
     # Define the scenario groups that are outside of the simulator's capabilities
     scenarios_to_remove = ["Control Loss", "Human fault", "Animal Interaction", "Visibility"]

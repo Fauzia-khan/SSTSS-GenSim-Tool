@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QFormLayo
 from utils import delete_scenario_from_excel_file
 from constants import scenarios_excel_file_name
 from openpyxl import load_workbook
-from view_information_window import ViewInformationWindow
+from scenario_parameter_configuration_window import ViewInformationWindow
 from functools import partial
 
 

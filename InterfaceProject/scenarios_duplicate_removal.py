@@ -1,7 +1,7 @@
 import pandas as pd
 from PyQt5.QtWidgets import QMessageBox
 
-def remove_duplicate_scenarios(input_file="formulated_scenario_groups.xlsx", output_file="duplicate_removal.xlsx"):
+def remove_duplicate_scenarios(input_file="formulated_scenario_groups.xlsx", output_file="scenarios_after_duplicate_removal.xlsx"):
     """
     Removes duplicate scenarios from the formulated_scenario_groups.xlsx file.
 

@@ -4,7 +4,7 @@ import re
 def formulate_scenario_groups():
     # Load the Excel file into a pandas DataFrame
     #df = pd.read_excel('ODD_selected_scenarios.xlsx', header=[0, 1])  # Read multi-level headers
-    df = pd.read_excel('filtered_scenarios.xlsx', header=[0, 1])  # Read multi-level headers
+    df = pd.read_excel('user_selected_scenarios_from_catalog.xlsx', header=[0, 1])  # Read multi-level headers
     # Flatten the MultiIndex columns by combining the two levels of column headers
     df.columns = ['_'.join(col).strip() for col in df.columns.values]
     df.columns.values[-1] = 'image'

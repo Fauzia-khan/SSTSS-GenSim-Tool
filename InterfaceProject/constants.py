@@ -1,6 +1,6 @@
 
-#scenarios_excel_file_name = 'filtered_scenarios.xlsx'
-scenarios_excel_file_name1 = 'scenarios.xlsx'
+#scenarios_excel_file_name = 'user_selected_scenarios_from_catalog.xlsx'
+scenarios_excel_file_name1 = 'catalog_scenarios.xlsx'
 scenarios_excel_file_name = 'formulated_scenario_groups.xlsx'
 
 ODD_excel_file_name = "odd_selection_nested_structure.xlsx"

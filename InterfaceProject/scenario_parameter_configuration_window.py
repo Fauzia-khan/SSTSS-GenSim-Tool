@@ -99,7 +99,7 @@ class ViewInformationWindow(QDialog):
         self.ego_vehicle_dropdown = QComboBox()
         vehicle_options = ["Nissan.patrol","Tesla Model3", "Tesla Cybertruck", "Audi A2", "BMW X5", "Mercedes C-Class"]
         self.ego_vehicle_dropdown.addItems(vehicle_options)
-        files_layout.addRow(QLabel("Select Ego Vehicle"), self.ego_vehicle_dropdown)
+        files_layout.addRow(QLabel("Select Model for other vehicle"), self.ego_vehicle_dropdown)
 
         # Map dropdown
         self.map_dropdown = QComboBox()

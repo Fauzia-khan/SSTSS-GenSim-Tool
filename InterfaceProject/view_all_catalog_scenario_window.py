@@ -221,7 +221,7 @@ class ViewAllScenariosWindow(QDialog):
 
     def load_scenarios(self):
 
-        wb = load_workbook("scenarios.xlsx")
+        wb = load_workbook("catalog_scenarios.xlsx")
         ws = wb.active
         scenarios = []
         for i in range(3, ws.max_row + 1):
@@ -317,19 +317,19 @@ class ViewAllScenariosWindow(QDialog):
 
 
 
-        new_wb = load_workbook("scenarios.xlsx")
+        new_wb = load_workbook("catalog_scenarios.xlsx")
         new_ws = new_wb.active
 
 
-        for i in range(new_ws.max_row, 2, -1):  # Satırları sondan başa doğru sil
-            scenario_id = new_ws.cell(row=i, column=2).value  # Senaryo ID'si sütun 2'de
+        for i in range(new_ws.max_row, 2, -1):
+            scenario_id = new_ws.cell(row=i, column=2).value
             if scenario_id not in self.selected_scenarios:
                 new_ws.delete_rows(i)
 
 
-        new_wb.save("filtered_scenarios.xlsx")
+        new_wb.save("user_selected_scenarios_from_catalog.xlsx")
 
-        QMessageBox.information(self, "Success", f"Scenarios saved successfully to filtered_scenaris.xlsx.")
+        QMessageBox.information(self, "Success", f"Scenarios saved successfully to user_selected_scenarios_from_catalog.xlsx.")
 
     def ADD_ITEMS_TO_CATALOG_COMBO(self):
         """Populate the top combo with catalog items."""
@@ -383,7 +383,7 @@ class ViewAllScenariosWindow(QDialog):
             return
 
 
-        wb = load_workbook('scenarios.xlsx')
+        wb = load_workbook('catalog_scenarios.xlsx')
         ws = wb.active
 
         # Remove all rows that don't belong to the selected catalog
@@ -396,7 +396,7 @@ class ViewAllScenariosWindow(QDialog):
         for row in rows_to_keep[2:]:
             ws.append([cell.value for cell in row])
 
-        wb.save("filtered_scenarios.xlsx")
+        wb.save("user_selected_scenarios_from_catalog.xlsx")
         QMessageBox.information(self, "Success", f"Scenarios related to catalog '{selected_catalogs}' have been saved.")
         try:
             from scenario_grouping import formulate_scenario_groups
@@ -405,7 +405,7 @@ class ViewAllScenariosWindow(QDialog):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error while grouping scenarios:\n{str(e)}")
         try:
-            from remove_duplicates import remove_duplicate_scenarios
+            from scenarios_duplicate_removal import remove_duplicate_scenarios
             remove_duplicate_scenarios("formulated_scenario_groups.xlsx")  # cleans this file
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error while removing duplicates:\n{str(e)}")

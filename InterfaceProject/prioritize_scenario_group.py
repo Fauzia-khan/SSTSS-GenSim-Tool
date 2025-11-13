@@ -64,7 +64,7 @@ def prioritize_scenario_groups(dataset='US'):
     df_sorted = df_sorted.drop(columns=['Priority'])
 
     # Save the sorted DataFrame back to an Excel file
-    output_file = f'prioritized_scenarios_{dataset.lower()}.xlsx'
+    output_file = f'prioritized_scenario_groups_{dataset.lower()}.xlsx'
     df_sorted.to_excel(output_file, index=False)
 
     print(f"scenarios are prioritized, see file {output_file}")
