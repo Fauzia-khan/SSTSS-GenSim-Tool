@@ -3,6 +3,22 @@ import time
 import subprocess
 import threading
 import signal
+from simulation_control import run_scenario_runner, stop_autoware
+from scenario_template import update_follow_leading_vehicle_template
+from carla_control import launch_carla
+from autoware_control import launch_autoware
+from metrics_control import run_metrics
+from results_utils import (
+    find_latest_result_timestamp,
+    get_result_files,
+    read_summary_log,
+    zip_results
+)
+from results_backup import backup_simulation_outputs
+from weather_control import adjust_weather_condition
+from excel_parser import parse_scenario_tags
+
+
 
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QFormLayout,
@@ -45,36 +61,7 @@ class ViewInformationWindow(QDialog):
         road_topology_column_start, road_topology_column_end = 33, 35
         scenario_group_column = 38
 
-        # Actors
-        for i in range(actor_column_start, actor_column_end):
-            if ws.cell(row=scenario_row, column=i).value == 1:
-                tag_data['Actors'] = [ws.cell(row=1, column=i).value.split('_')[1]]
-
-        # Weather
-        for i in range(weather_column_start, weather_column_end):
-            if ws.cell(row=scenario_row, column=i).value == 1:
-                tag_data['Weather'] = [ws.cell(row=1, column=i).value.split('_')[1]]
-
-        # Light
-        for i in range(light_column_start, light_column_end):
-            if ws.cell(row=scenario_row, column=i).value == 1:
-                tag_data['Light'] = [ws.cell(row=1, column=i).value.split('_')[1]]
-                self.global_light_condition = tag_data['Light']
-
-        # Driving Maneuver
-        for i in range(behaviour_column_start, behaviour_column_end):
-            if ws.cell(row=scenario_row, column=i).value == 1:
-                tag_data['Driving Maneuver'] = [ws.cell(row=1, column=i).value.split('_')[1]]
-
-        # Road Topology
-        for i in range(road_topology_column_start, road_topology_column_end):
-            if ws.cell(row=scenario_row, column=i).value == 1:
-                tag_data['Road Topology'] = [ws.cell(row=1, column=i).value.split('_')[1]]
-
-        # Scenario Group
-        scenario_group = ws.cell(row=scenario_row, column=scenario_group_column).value
-        if scenario_group:
-            tag_data['Scenario Group'] = [scenario_group]
+        tag_data, self.global_light_condition = parse_scenario_tags(excel_filename, scenario_row)
 
         for category, items in tag_data.items():
             tag_layout.addRow(QLabel(f"<b>{category}</b>"), QLabel(""))
@@ -132,42 +119,6 @@ class ViewInformationWindow(QDialog):
 
     # ------------------- Simulation Control -------------------
 
-    def run_scenario_runner(self, summary_log):
-        scenario_runner_script = "/home/laima/Desktop/SSTSS Tool 1st september/InterfaceProject/run_scenario_runner.sh"
-        print(f"[INFO] Running ScenarioRunner from {scenario_runner_script}")
-        print(f"[INFO] Saving output to {summary_log}")
-
-        with open(summary_log, "w", encoding="utf-8", errors="ignore") as f:
-            process = subprocess.Popen(
-                ["bash", scenario_runner_script],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True
-            )
-            for line in process.stdout:
-                print(line, end="")
-                f.write(line)
-            process.wait()
-
-        print(f"[✓] ScenarioRunner finished. Summary saved to {summary_log}")
-
-    def stop_autoware(self):
-        """Find and stop Autoware process by name."""
-        try:
-            result = subprocess.run(
-                ["pgrep", "-f", "roslaunch autoware_mini start_carla.launch"],
-                capture_output=True,
-                text=True
-            )
-            pids = result.stdout.strip().splitlines()
-            for pid in pids:
-                print(f"[INFO] Stopping Autoware process {pid}")
-                os.kill(int(pid), signal.SIGTERM)
-            if not pids:
-                print("[INFO] No Autoware process found to stop.")
-        except Exception as e:
-            print(f"[ERROR] Failed to stop Autoware: {e}")
-
     def execute_simulation(self):
         print("In: Execute Simulation")
         ego_vehicle_speed = self.speed_input.text()
@@ -175,44 +126,27 @@ class ViewInformationWindow(QDialog):
         other_vehicle_speed = self.other_actor_speed_input.text()
         timeout = self.timeout_input.text()
 
-        # Update Scenario Template
-        with open('scenario_files/python_files/template_follow_leading_vehicle.py', 'r') as f:
-            lines = f.readlines()
-        lines[7] = f'timeout = {timeout}\n'
-        lines[8] = f'other_vehicle_distance = {other_vehicle_distance}\n'
-        lines[9] = f'other_vehicle_speed = {other_vehicle_speed}\n'
-        with open(
-            '/home/laima/Documents/scenario_runner-master/srunner/scenarios/follow_leading_vehicle.py',
-            'w', encoding='utf-8'
-        ) as f:
-            f.writelines(lines)
+        update_follow_leading_vehicle_template(
+            timeout=timeout,
+            distance=other_vehicle_distance,
+            speed=other_vehicle_speed
+        )
+
+        # 2. Update weather in XML scenario
+        if self.global_light_condition:
+            adjust_weather_condition(self.global_light_condition[0])
 
         # Start CARLA
-        subprocess.Popen(["gnome-terminal", "--", "bash", "-c", "./generate_simulation.sh; exec bash"])
-        time.sleep(10)
+        launch_carla()
 
         # Start Autoware
-        cmd = (
-            "source /opt/ros/noetic/setup.bash && "
-            "source ~/ali/ali_ws/devel/setup.bash && "
-            "source ~/Documents/autoware_mini_ws/devel/setup.bash && "
-            "export CARLA_ROOT=$HOME/Documents/CARLA_0.9.13 && "
-            "export PYTHONPATH=/home/laima/ali/ali_ws/devel/lib/python3/dist-packages:"
-            "/home/laima/Documents/autoware_mini_ws/devel/lib/python3/dist-packages:"
-            "/opt/ros/noetic/lib/python3/dist-packages:"
-            "/home/laima/Documents/CARLA_0.9.13/PythonAPI/carla/dist/carla-0.9.13-py3.7-linux-x86_64.egg:"
-            "/home/laima/Documents/CARLA_0.9.13/PythonAPI/carla/agents:"
-            "/home/laima/Documents/CARLA_0.9.13/PythonAPI/carla && "
-            f"roslaunch autoware_mini start_carla.launch map_name:=Town01 generate_traffic:=false speed_limit:=10; exec bash"
-        )
-        subprocess.Popen(["terminator", "-e", f"bash -c '{cmd}'"])
-        time.sleep(7)
+        launch_autoware()
 
         # Run ScenarioRunner
         results_dir = "/home/laima/Documents/scenario_runner-master/results/test"
         os.makedirs(results_dir, exist_ok=True)
         summary_log = os.path.join(results_dir, "scenario_summary.log")
-        runner_thread = threading.Thread(target=self.run_scenario_runner, args=(summary_log,))
+        runner_thread = threading.Thread(target=run_scenario_runner, args=(summary_log,))
         runner_thread.start()
 
         # Run set_goal
@@ -222,69 +156,54 @@ class ViewInformationWindow(QDialog):
         runner_thread.join()
 
         # Stop Autoware
-        self.stop_autoware()
+        stop_autoware()
 
         # Run Metrics
-        try:
-            subprocess.run(
-                [
-                    "python3.8", "metrics_manager.py",
-                    "--metric", "srunner/metrics/examples/velocity_and_distance_metric.py",
-                    "--log", "results/test/FollowLeadingVehicle_1.log"
-                ],
-                cwd="/home/laima/Documents/scenario_runner-master",
-                env={
-                    **os.environ,
-                    "CARLA_ROOT": "/home/laima/Documents/CARLA_0.9.13",
-                    "PYTHONPATH": (
-                        "/home/laima/ali/ali_ws/devel/lib/python3/dist-packages:"
-                        "/home/laima/Documents/autoware_mini_ws/devel/lib/python3/dist-packages:"
-                        "/opt/ros/noetic/lib/python3/dist-packages:"
-                        "/home/laima/Documents/CARLA_0.9.13/PythonAPI/carla/dist/carla-0.9.13-py3.7-linux-x86_64.egg:"
-                        "/home/laima/Documents/CARLA_0.9.13/PythonAPI/carla/agents:"
-                        "/home/laima/Documents/CARLA_0.9.13/PythonAPI/carla"
-                    )
-                },
-                check=True
-            )
-            print("[✓] Metrics script finished.")
+
+        success = run_metrics()
+        if success:
             self.show_results_button.setEnabled(True)
-        except subprocess.CalledProcessError as e:
-            print(f"[ERROR] Failed to run metrics script: {e}")
+        else:
+
+            QMessageBox.warning(self, "Metrics Error", "Failed to compute metrics. See console for details.")
             return
 
     # ------------------- Results Display -------------------
 
     def show_results(self):
         from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QScrollArea, QWidget, QPushButton, QFileDialog
-        import re, zipfile
 
         results_dir = "/home/laima/Documents/scenario_runner-master/results/test"
+
         if not os.path.exists(results_dir):
             QMessageBox.warning(self, "Results Not Found", f"⚠️ Path does not exist:\n{results_dir}")
             return
 
-        all_files = os.listdir(results_dir)
-        pattern = re.compile(r"FollowScenario_(\d{8}_\d{6})")
-        timestamps = [m.group(1) for f in all_files if (m := pattern.search(f))]
-        latest_ts = max(timestamps) if timestamps else None
-
-        selected_files = []
-        if latest_ts:
-            for f in all_files:
-                if latest_ts in f and f.lower().endswith((".png", ".jpg", ".jpeg", ".csv")):
-                    selected_files.append(os.path.join(results_dir, f))
-
-        log_path = os.path.join(results_dir, "FollowLeadingVehicle_1.log")
-        json_path = os.path.join(results_dir, "FollowLeadingVehicle_1.json")
-        summary_path = os.path.join(results_dir, "scenario_summary.log")
-        if os.path.exists(log_path): selected_files.append(log_path)
-        if os.path.exists(json_path): selected_files.append(json_path)
-
-        if not selected_files and not os.path.exists(summary_path):
-            QMessageBox.warning(self, "No Results", "⚠️ No results found for latest simulation")
+        # --------------------
+        # 1️⃣ Use helper: find latest timestamp
+        # --------------------
+        latest_ts = find_latest_result_timestamp(results_dir)
+        if not latest_ts:
+            QMessageBox.warning(self, "No Results", "⚠️ No valid results found")
             return
 
+        # --------------------
+        # 2️⃣ Use helper: collect all result files
+        # --------------------
+        selected_files = get_result_files(results_dir, latest_ts)
+
+        # --------------------
+        # 3️⃣ Use helper: read summary log
+        # --------------------
+        summary_text, summary_path = read_summary_log(results_dir)
+
+        if not selected_files and not summary_text:
+            QMessageBox.warning(self, "No Results", "No result files found.")
+            return
+
+        # --------------------
+        # 4️⃣ GUI Code (unchanged)
+        # --------------------
         dialog = QDialog(self)
         dialog.setWindowTitle("Simulation Report")
         dialog.resize(1000, 800)
@@ -293,6 +212,7 @@ class ViewInformationWindow(QDialog):
         container = QWidget()
         container_layout = QVBoxLayout(container)
 
+        # Display images
         for f in selected_files:
             if f.lower().endswith((".png", ".jpg", ".jpeg")):
                 pixmap = QPixmap(f)
@@ -302,9 +222,8 @@ class ViewInformationWindow(QDialog):
                     img_label.setAlignment(Qt.AlignCenter)
                     container_layout.addWidget(img_label)
 
-        if os.path.exists(summary_path):
-            with open(summary_path, "r", encoding="utf-8", errors="ignore") as f:
-                summary_text = f.read()
+        # Display summary
+        if summary_text:
             summary_label = QLabel(summary_text)
             summary_label.setFont(QFont("Courier", 10))
             summary_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
@@ -312,19 +231,18 @@ class ViewInformationWindow(QDialog):
             container_layout.addWidget(QLabel("---- Scenario Summary ----"))
             container_layout.addWidget(summary_label)
 
+        # --------------------
+        # 5️⃣ Use helper: zipping
+        # --------------------
         def download_all():
             save_path, _ = QFileDialog.getSaveFileName(
                 self,
                 "Save Results As",
-                f"simulation_results_{latest_ts}.zip" if latest_ts else "simulation_results.zip",
+                f"simulation_results_{latest_ts}.zip",
                 "Zip Files (*.zip)"
             )
             if save_path:
-                with zipfile.ZipFile(save_path, 'w') as zipf:
-                    for file_path in selected_files:
-                        zipf.write(file_path, os.path.basename(file_path))
-                    if os.path.exists(summary_path):
-                        zipf.write(summary_path, os.path.basename(summary_path))
+                zip_results(save_path, selected_files, summary_path)
                 print(f"[✓] All files saved to {save_path}")
 
         btn = QPushButton("Download Files")
@@ -339,61 +257,5 @@ class ViewInformationWindow(QDialog):
         dialog.exec_()
 
 
-    def backup_simulation_outputs(self, timestamp):
-        import shutil
-        import os
-        import glob
 
-        base_dir = "/home/laima/Documents/scenario_runner-master/results/test"
-        backup_dir = os.path.join(base_dir, f"FollowLeadingVehicle_1_{timestamp}")
-        os.makedirs(backup_dir, exist_ok=True)
 
-        print(f"[INFO] Backing up outputs to: {backup_dir}")
-
-        # Copy .log and .json
-        for ext in ["log", "json"]:
-            src = os.path.join(base_dir, f"FollowLeadingVehicle_1.{ext}")
-            if os.path.exists(src):
-                shutil.copy(src, backup_dir)
-                print(f"[✓] Copied {src}")
-            else:
-                print(f"[!] Missing: {src}")
-
-        # Copy metrics files with timestamp
-        for ext in ["metrics.csv", "speed_distance.png", "jerk_1hz.png"]:
-            pattern = f"FollowScenario_{timestamp}_{ext}"
-            matches = glob.glob(os.path.join(base_dir, pattern))
-            for f in matches:
-                shutil.copy(f, backup_dir)
-                print(f"[✓] Copied {f}")
-            if not matches:
-                print(f"[!] No match for: {pattern}")
-
-    def adjust_weather_condition(self):
-        file_path = '/home/laima/Documents/scenario_runner-master/srunner/examples/FollowLeadingVehicle.xml'
-
-        # Check Light
-        if self.global_light_condition[0].lower() == 'day':
-            sun_altitude_angle = 90
-        else:
-            sun_altitude_angle = -10
-
-        with open(file_path, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-
-        new_lines = []
-        for line in lines:
-            if "<weather" in line:
-                import re
-                # replace cloudiness
-                line = re.sub(r'cloudiness="[^"]+"', 'cloudiness="0"', line)
-                # replace precipitation
-                line = re.sub(r'precipitation="[^"]+"', 'precipitation="0"', line)
-
-                #replace daylight
-                line = re.sub(r'sun_altitude_angle="[^"]+"', f'sun_altitude_angle="{sun_altitude_angle}"', line)
-                print("Daylight status set to", sun_altitude_angle)
-            new_lines.append(line)
-
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.writelines(new_lines)

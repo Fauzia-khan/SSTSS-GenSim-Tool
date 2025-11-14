@@ -18,6 +18,8 @@ from scenario_grouping import formulate_scenario_groups
 from prioritize_scenario_group import prioritize_scenario_groups
 from simulator_filtering import filter_scenarios_based_on_simulator
 from select_scenario_window import SelectScenarioWindow
+from simulation_control import run_scenario_runner, stop_autoware
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 import os
