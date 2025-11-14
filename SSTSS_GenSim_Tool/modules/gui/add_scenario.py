@@ -2,8 +2,7 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QComboBox, QLabel, QLineEdit, QTextEdit, QGridLayout, QFileDialog, QMessageBox, QDialog
 from PyQt5.QtCore import pyqtSignal,Qt
 from PyQt5.QtCore import QTimer
-#from modules.utils import save_to_excel
-#from modules.constants import scenarios_excel_file_name
+
 from openpyxl import load_workbook
 from modules.core.utils import save_to_excel
 from modules.constants import scenarios_excel_file_name
