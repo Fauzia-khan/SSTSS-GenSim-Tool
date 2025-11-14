@@ -1,10 +1,11 @@
+from config import SCENARIO_XML
 import os
 import re
 
 
-def adjust_weather_condition(light_condition,
-                             xml_path="/home/laima/Documents/scenario_runner-master/srunner/examples/FollowLeadingVehicle.xml"):
-    """
+#def adjust_weather_condition(light_condition,
+                            # xml_path="/home/laima/Documents/scenario_runner-master/srunner/examples/FollowLeadingVehicle.xml"):
+"""
     Updates the weather settings in the scenario XML based on the light condition.
 
     Args:
@@ -12,6 +13,7 @@ def adjust_weather_condition(light_condition,
         xml_path (str): Path to the scenario XML file.
     """
 
+def adjust_weather_condition(light_condition, xml_path=SCENARIO_XML):
     if light_condition.lower() == "day":
         sun_altitude_angle = 90
     else:

@@ -1,24 +1,28 @@
 import os
+from config import SCENARIO_RUNNER_ROOT, SCENARIO_TEMPLATE_PATH
+
 
 def update_follow_leading_vehicle_template(timeout, distance, speed,
-                                           template_path="scenario_files/python_files/template_follow_leading_vehicle.py",
-                                           output_path="/home/laima/Documents/scenario_runner-master/srunner/scenarios/follow_leading_vehicle.py"):
+                                           template_path=SCENARIO_TEMPLATE_PATH,
+                                           output_path=None):
     """
     Update the FollowLeadingVehicle scenario template with new parameters.
-
-    Args:
-        timeout (str): The timeout value.
-        distance (str): Distance of the other vehicle.
-        speed (str): Speed of the other vehicle.
-        template_path (str): Path to the template file.
-        output_path (str): Path where updated scenario is saved.
     """
+
+    # If output path is not provided, build it from config
+    if output_path is None:
+        output_path = os.path.join(
+            SCENARIO_RUNNER_ROOT,
+            "srunner",
+            "scenarios",
+            "follow_leading_vehicle.py"
+        )
 
     # 1. Load template
     with open(template_path, 'r') as f:
         lines = f.readlines()
 
-    # 2. Replace specific lines (line indexes 7, 8, 9)
+    # 2. Replace specific lines
     lines[7] = f'timeout = {timeout}\n'
     lines[8] = f'other_vehicle_distance = {distance}\n'
     lines[9] = f'other_vehicle_speed = {speed}\n'

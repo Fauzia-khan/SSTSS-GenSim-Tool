@@ -1,3 +1,4 @@
+from config import SCENARIO_RUNNER_ROOT
 import os
 import signal
 import subprocess
@@ -8,6 +9,8 @@ def run_scenario_runner(summary_log: str):
     Run ScenarioRunner via a shell script and write all output to the given summary log file.
     """
     scenario_runner_script = "/home/laima/Desktop/SSTSS Tool 1st september/InterfaceProject/run_scenario_runner.sh"
+    #scenario_runner_script = os.path.join(SCENARIO_RUNNER_ROOT, "run_scenario_runner.sh")
+
     print(f"[INFO] Running ScenarioRunner from {scenario_runner_script}")
     print(f"[INFO] Saving output to {summary_log}")
 

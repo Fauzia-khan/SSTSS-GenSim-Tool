@@ -17,7 +17,7 @@ from results_utils import (
 from results_backup import backup_simulation_outputs
 from weather_control import adjust_weather_condition
 from excel_parser import parse_scenario_tags
-
+from config import RESULTS_DIR
 
 
 from PyQt5.QtWidgets import (
@@ -173,7 +173,8 @@ class ViewInformationWindow(QDialog):
     def show_results(self):
         from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QScrollArea, QWidget, QPushButton, QFileDialog
 
-        results_dir = "/home/laima/Documents/scenario_runner-master/results/test"
+        #results_dir = "/home/laima/Documents/scenario_runner-master/results/test"
+        results_dir = RESULTS_DIR
 
         if not os.path.exists(results_dir):
             QMessageBox.warning(self, "Results Not Found", f"⚠️ Path does not exist:\n{results_dir}")

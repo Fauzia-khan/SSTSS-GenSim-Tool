@@ -2,11 +2,6 @@ import subprocess
 import time
 
 def launch_autoware():
-    """
-    Launch Autoware Mini with the required ROS environments and PYTHONPATH.
-    Uses terminator to open a separate terminal window.
-    """
-
     print("[INFO] Launching Autoware Mini...")
 
     cmd = (
@@ -23,9 +18,11 @@ def launch_autoware():
         "roslaunch autoware_mini start_carla.launch map_name:=Town01 generate_traffic:=false speed_limit:=10; exec bash"
     )
 
-    subprocess.Popen(["terminator", "-e", f"bash -c '{cmd}'"])
+    subprocess.Popen([
+        "terminator",
+        "-e",
+        f"bash -c \"{cmd}\""
+    ])
 
-    # Wait for Autoware to start fully
     time.sleep(7)
-
     print("[✓] Autoware Mini launched.")

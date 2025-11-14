@@ -1,3 +1,4 @@
+from config import SCENARIO_RUNNER_ROOT
 import os
 import subprocess
 
@@ -15,7 +16,8 @@ def run_metrics():
                 "--metric", "srunner/metrics/examples/velocity_and_distance_metric.py",
                 "--log", "results/test/FollowLeadingVehicle_1.log",
             ],
-            cwd="/home/laima/Documents/scenario_runner-master",
+            #cwd="/home/laima/Documents/scenario_runner-master",
+            cwd=SCENARIO_RUNNER_ROOT,
             env={
                 **os.environ,
                 "CARLA_ROOT": "/home/laima/Documents/CARLA_0.9.13",

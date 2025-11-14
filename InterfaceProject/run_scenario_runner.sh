@@ -36,6 +36,6 @@ mkdir -p "$LOG_DIR"
 
 python3.8 scenario_runner.py \
   --scenario FollowLeadingVehicle_1 \
-  --additionalScenario /home/laima/Documents/scenario_runner-master/srunner/scenarios/follow_leading_vehicle_1.py \
+  --additionalScenario /home/laima/Documents/scenario_runner-master/srunner/scenarios/follow_leading_vehicle.py \
   --waitForEgo \
   --record "$LOG_DIR"
