@@ -1,0 +1,53 @@
+.
+├── config.py
+├── environment_init.log
+├── environment_sourced.log
+├── generate_simulation.sh
+├── images
+├── __init__.py
+├── main.py
+├── modules
+│   ├── constants.py
+│   ├── core
+│   │   ├── autoware_control.py
+│   │   ├── carla_control.py
+│   │   ├── excel_parser.py
+│   │   ├── metrics_control.py
+│   │   ├── prioritize_scenario_group.py
+│   │   ├── results_backup.py
+│   │   ├── results_utils.py
+│   │   ├── scenario_grouping.py
+│   │   ├── scenario_python_template.py
+│   │   ├── scenarios_duplicate_removal.py
+│   │   ├── scenario_template.py
+│   │   ├── selected_scenarios.py
+│   │   ├── simulation_control.py
+│   │   ├── simulator_filtering.py
+│   │   ├── utils.py
+│   │   └── weather_control.py
+│   ├── gui
+│   │   ├── add_scenario.py
+│   │   ├── __init__.py
+│   │   ├── scenario_parameter_configuration_window.py
+│   │   ├── select_odd_window.py
+│   │   ├── select_scenarios_basedOn_ODD.py
+│   │   ├── select_scenario_window.py
+│   │   ├── view_all_catalog_scenario_window.py
+│   │   └── view_scenario_window.py
+│   ├── __init__.py
+│   └── logic
+│       └── __init__.py
+├── previous_comments.txt
+├── project_structure.txt
+├── project_tree_clean.txt
+├── project_tree.txt
+├── requirements.txt
+├── runandsaveplots.py
+├── run_awmini.sh
+├── run_scenario_log_analyzer.sh
+├── run_scenario_runner.sh
+├── run_set_goal.sh
+├── run_with_ros.sh
+└── scenario_config_template.xml
+
+5 directories, 45 files
