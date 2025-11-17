@@ -1,6 +1,6 @@
 
 from openpyxl.reader.excel import load_workbook
-from modules.constants import scenarios_excel_file_name, ODD_excel_file_name, selected_scenarios_based_on_ODD_file_name
+from Scenario_Selection_Module import USER_SELECTED_SCENARIOS_PATH, CATALOG_SCENARIOS_PATH, FORMULATED_SCENARIO_GROUPS_PATH, DUPLICATE_SCENARIO_REMOVAL_PATH,USER_SELECTED_ODD_PATH,SELECTED_SCENARIO_BASEDon_ODD_PATH
 from modules.core.utils import remap_excel_indexes
 import os
 
@@ -11,9 +11,10 @@ class SelectScenariosBasedOnOdd:
         self.get_scenarios_using_ODD_file()
 
     def create_excel_file(self):
-        source_file = scenarios_excel_file_name
-        destination_file = selected_scenarios_based_on_ODD_file_name
-        wb = load_workbook(os.getcwd()+'/'+source_file)
+        source_file = DUPLICATE_SCENARIO_REMOVAL_PATH
+        destination_file = SELECTED_SCENARIO_BASEDon_ODD_PATH
+        #wb = load_workbook(os.getcwd()+'/'+source_file)
+        wb = load_workbook(DUPLICATE_SCENARIO_REMOVAL_PATH)
         wb.save(destination_file)
 
     def get_scenarios_using_ODD_file(self):
@@ -22,13 +23,13 @@ class SelectScenariosBasedOnOdd:
         #### Step1: GET ODD FILE AND ACCESS DATA
 
         # ODD FILE
-        wb_ODD = load_workbook(ODD_excel_file_name)
+        wb_ODD = load_workbook(USER_SELECTED_ODD_PATH)
         ws_ODD = wb_ODD.active
 
         ODD_file_main_information_row = 8 #7th row has the data.
 
         # TARGET FILE
-        wb_target = load_workbook(selected_scenarios_based_on_ODD_file_name)
+        wb_target = load_workbook(SELECTED_SCENARIO_BASEDon_ODD_PATH)
         ws_target = wb_target.active
 
 
@@ -249,7 +250,7 @@ class SelectScenariosBasedOnOdd:
         """
 
         ## !! SAVE FILE !! ##
-        wb_target.save(selected_scenarios_based_on_ODD_file_name)
+        wb_target.save(SELECTED_SCENARIO_BASEDon_ODD_PATH)
         ## !! ADJUST INDEXES !! ##
-        remap_excel_indexes(selected_scenarios_based_on_ODD_file_name, start_from=2)
+        remap_excel_indexes(SELECTED_SCENARIO_BASEDon_ODD_PATH, start_from=2)
         print("scenarios are selected based on selected ODD, see file ODD_selected_scenarios.")

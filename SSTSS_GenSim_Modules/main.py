@@ -9,6 +9,12 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QTimer
 from openpyxl.reader.excel import load_workbook
 import os
+from Scenario_Selection_Module import (
+    FILTERED_SCENARIOS_CARLA_PATH,
+    FILTERED_SCENARIOS_GAZEBO_PATH,
+    FILTERED_SCENARIOS_AUDACITY_PATH,
+    FILTERED_SCENARIOS_LGSVL_PATH
+)
 
 
 from Scenario_Selection_Module.add_scenario import AddScenarioWindow
@@ -16,7 +22,7 @@ from Scenario_Selection_Module.view_scenario_window import ViewScenariosWindow
 from Scenario_Selection_Module.view_all_catalog_scenario_window import ViewAllScenariosWindow
 from Scenario_Selection_Module.select_odd_window import SelectODDWindow
 from Scenario_Selection_Module.select_scenarios_basedOn_ODD import SelectScenariosBasedOnOdd
-from Scenario_Selection_Module.scenario_grouping import formulate_scenario_groups
+from Scenario_Selection_Module.formulate_scenario_groups import formulate_scenario_groups
 from Scenario_Selection_Module.prioritize_scenario_group import prioritize_scenario_groups
 from Scenario_Selection_Module.simulator_filtering import filter_scenarios_based_on_simulator
 from Scenario_Selection_Module.select_scenario_window import SelectScenarioWindow
@@ -143,10 +149,10 @@ class ScenarioDatabaseApp(QWidget):
 
 
     def ADD_ITEMS_TO_CATALOG_COMBO(self):
-        from modules.constants import scenarios_excel_file_name
+        from Scenario_Selection_Module import CATALOG_SCENARIOS_PATH
 
-        print(os.getcwd()+"/"+scenarios_excel_file_name)
-        wb = load_workbook(os.getcwd()+"/"+scenarios_excel_file_name)
+        print("Reading:", CATALOG_SCENARIOS_PATH)
+        wb = load_workbook(CATALOG_SCENARIOS_PATH)
         ws = wb.active
         print(23)
         catalogs = []
@@ -358,24 +364,52 @@ class ScenarioDatabaseApp(QWidget):
     def _handle_simulator_selection(self):
         """Handle the simulator selection and show progress dialog before running scenarios."""
         selected_simulator = self.simulator_combo.currentText()
-
-        # Optional: store selected simulator if you need it elsewhere
         self.selected_simulator = selected_simulator
 
-        # Close the simulator window
+        # Close window
         self.simulator_window.close()
-        dataset_name = "us"  # <---- choose or pass your dataset name here
-        filter_scenarios_based_on_simulator(selected_simulator, dataset_name)
-        # Show a progress/loading dialog
-        progress = QProgressDialog("Selecting scenarios in progress...", None, 0, 0, self)
-        progress.setWindowModality(Qt.ApplicationModal)
-        progress.setWindowTitle("Please Wait")
-        progress.setCancelButton(None)
-        progress.setMinimumDuration(0)
-        progress.show()
 
-        # Use a short delay so the progress window appears before running heavy code
-        QTimer.singleShot(600, lambda: self._run_scenarios_with_loading(progress))
+        # Create filtered simulator file
+        from Scenario_Selection_Module.simulator_filtering import filter_scenarios_based_on_simulator
+        filter_scenarios_based_on_simulator(selected_simulator, self.overall_selected_dataset)
+
+        # NOW OPEN THE NEXT WINDOW: scenario selector
+        try:
+            from Scenario_Selection_Module.selected_scenarios import (
+                run_us_based_scenario_selector,
+                run_eu_based_scenario_selector
+            )
+
+            # Build file path for filtered simulator output
+            from Scenario_Selection_Module import (
+                FILTERED_SCENARIOS_CARLA_PATH,
+                FILTERED_SCENARIOS_GAZEBO_PATH,
+                FILTERED_SCENARIOS_AUDACITY_PATH,
+                FILTERED_SCENARIOS_LGSVL_PATH,
+            )
+
+            simulator_map = {
+                "Carla": FILTERED_SCENARIOS_CARLA_PATH,
+                "Gazebo": FILTERED_SCENARIOS_GAZEBO_PATH,
+                "Audacity": FILTERED_SCENARIOS_AUDACITY_PATH,
+                "LGSVL": FILTERED_SCENARIOS_LGSVL_PATH,
+            }
+
+            file_path = simulator_map[selected_simulator]
+
+            # run selectors
+            if self.overall_selected_dataset == "US":
+                run_us_based_scenario_selector(file_path)
+            else:
+                run_eu_based_scenario_selector(file_path)
+
+            # NOW SHOW THE SELECT SCENARIO WINDOW
+            from Scenario_Selection_Module.select_scenario_window import SelectScenarioWindow
+            self.ssw_window = SelectScenarioWindow(self.overall_selected_dataset)
+            self.ssw_window.exec_()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An error occurred: {str(e)}")
 
     def _run_scenarios_with_loading(self, progress_dialog):
         """Run scenario selection after simulator selection."""
@@ -386,40 +420,34 @@ class ScenarioDatabaseApp(QWidget):
         finally:
             progress_dialog.close()
 
-
-
-
     def run_select_scenarios(self):
-        # Use the dataset selected earlier in step 3
-        if not hasattr(self, "overall_selected_dataset"):
-            QMessageBox.warning(self, "Dataset Not Selected",
-                                "Please select a dataset first (Step 3: Select Dataset).")
+
+        if not hasattr(self, "selected_simulator"):
+            QMessageBox.warning(self, "Simulator Not Selected",
+                                "Please select a simulator first (Step 4).")
             return
 
-        selected_database = self.overall_selected_dataset.lower()
+        simulator_map = {
+            "Carla": FILTERED_SCENARIOS_CARLA_PATH,
+            "Gazebo": FILTERED_SCENARIOS_GAZEBO_PATH,
+            "Audacity": FILTERED_SCENARIOS_AUDACITY_PATH,
+            "LGSVL": FILTERED_SCENARIOS_LGSVL_PATH,
+        }
 
-        try:
-            # Run dataset-specific selector
-            if selected_database == 'us':
-                from Scenario_Selection_Module.selected_scenarios import run_us_based_scenario_selector
-                run_us_based_scenario_selector()
+        file_path = simulator_map[self.selected_simulator]
 
-            elif selected_database == 'eu':
-                from Scenario_Selection_Module.selected_scenarios import run_eu_based_scenario_selector
-                run_eu_based_scenario_selector()
+        if self.overall_selected_dataset == "US":
+            from Scenario_Selection_Module.selected_scenarios import run_us_based_scenario_selector
+            run_us_based_scenario_selector(file_path)
 
-            else:
-                QMessageBox.warning(self, "Unsupported Dataset",
-                                    f"No selector available for: {self.overall_selected_dataset}")
-                return
+        elif self.overall_selected_dataset == "EU":
+            from Scenario_Selection_Module.selected_scenarios import run_eu_based_scenario_selector
+            run_eu_based_scenario_selector(file_path)
 
-            # Open the SelectScenarioWindow
-            from Scenario_Selection_Module.select_scenario_window import SelectScenarioWindow
-            self.ssw_window = SelectScenarioWindow(self.overall_selected_dataset)
-            self.ssw_window.exec_()
-
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"An error occurred: {str(e)}")
+        else:
+            QMessageBox.warning(self, "Invalid Dataset",
+                                f"No selector for {self.overall_selected_dataset}")
+            return
 
     def run_filter_scenarios(self):
         # Based on the simulator selection, run the filter function

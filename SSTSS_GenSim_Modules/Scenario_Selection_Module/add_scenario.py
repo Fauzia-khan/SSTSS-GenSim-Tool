@@ -3,10 +3,9 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QComboBox, QLabel, QLineEdit, 
 from PyQt5.QtCore import pyqtSignal,Qt
 from PyQt5.QtCore import QTimer
 
-
+from Scenario_Selection_Module import CATALOG_SCENARIOS_PATH
 from openpyxl import load_workbook
 from modules.core.utils import save_to_excel
-from modules.constants import scenarios_excel_file_name
 
 # Add Scenario Window
 class AddScenarioWindow(QDialog):
@@ -176,7 +175,9 @@ class AddScenarioWindow(QDialog):
         # Generate a unique scenario ID based on catalog
         # Generate the scenario ID
 
-        wb = load_workbook(scenarios_excel_file_name)
+
+        wb = load_workbook(CATALOG_SCENARIOS_PATH)
+
         ws = wb.active
 
         _count = 0

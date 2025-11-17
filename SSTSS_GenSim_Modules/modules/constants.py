@@ -4,7 +4,13 @@
 import os
 SCENARIO_RUNNER_ROOT = os.getcwd()
 
-scenarios_excel_file_name1 = 'catalog_scenarios.xlsx'
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))  # points to modules/
+SCENARIO_SELECTION_DIR = os.path.join(BASE_DIR, "..", "Scenario_Selection_Module")
+
+scenarios_excel_file_name1 = os.path.join(SCENARIO_SELECTION_DIR, "catalog_scenarios.xlsx")
+
 scenarios_excel_file_name = 'formulated_scenario_groups.xlsx'
 
 ODD_excel_file_name = "odd_selection_nested_structure.xlsx"

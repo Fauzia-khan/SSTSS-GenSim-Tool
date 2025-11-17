@@ -8,7 +8,7 @@ from modules.constants import scenarios_excel_file_name
 from openpyxl import load_workbook, Workbook
 import shutil
 from PyQt5.QtCore import Qt,  pyqtSignal
-
+from Scenario_Selection_Module import USER_SELECTED_SCENARIOS_PATH, CATALOG_SCENARIOS_PATH
 from PyQt5.QtCore import pyqtSignal, Qt
 from PyQt5.QtGui import QStandardItemModel
 from PyQt5.QtWidgets import QComboBox
@@ -323,7 +323,7 @@ class ViewAllScenariosWindow(QDialog):
 
 
 
-        new_wb = load_workbook("catalog_scenarios.xlsx")
+        new_wb = load_workbook(CATALOG_SCENARIOS_PATH)
         new_ws = new_wb.active
 
 
@@ -333,7 +333,7 @@ class ViewAllScenariosWindow(QDialog):
                 new_ws.delete_rows(i)
 
 
-        new_wb.save("user_selected_scenarios_from_catalog.xlsx")
+        new_wb.save(USER_SELECTED_SCENARIOS_PATH)
 
         QMessageBox.information(self, "Success", f"Scenarios saved successfully to user_selected_scenarios_from_catalog.xlsx.")
 
@@ -409,17 +409,18 @@ class ViewAllScenariosWindow(QDialog):
         for row in rows_to_keep[2:]:
             ws.append([cell.value for cell in row])
 
-        wb.save("user_selected_scenarios_from_catalog.xlsx")
+        wb.save(USER_SELECTED_SCENARIOS_PATH)
         QMessageBox.information(self, "Success", f"Scenarios related to catalog '{selected_catalogs}' have been saved.")
         try:
-            from Scenario_Selection_Module.scenario_grouping import formulate_scenario_groups
+            from Scenario_Selection_Module.formulate_scenario_groups import formulate_scenario_groups
             formulate_scenario_groups()  # This will process filtered_scenarios.xlsx
             QMessageBox.information(self, "Grouping Done", "Scenario groups have been formulated successfully.")
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error while grouping scenarios:\n{str(e)}")
         try:
             from Scenario_Selection_Module.scenarios_duplicate_removal import remove_duplicate_scenarios
-            remove_duplicate_scenarios("formulated_scenario_groups.xlsx")  # cleans this file
+            from Scenario_Selection_Module import FORMULATED_SCENARIO_GROUPS_PATH
+            remove_duplicate_scenarios(FORMULATED_SCENARIO_GROUPS_PATH)
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error while removing duplicates:\n{str(e)}")
 

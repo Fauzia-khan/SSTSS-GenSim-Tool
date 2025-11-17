@@ -1,11 +1,11 @@
 import os
 import pandas as pd
 from openpyxl import load_workbook
-from modules.constants import scenarios_excel_file_name1
+from Scenario_Selection_Module import CATALOG_SCENARIOS_PATH
 
 def delete_scenario_from_excel_file(selected_indexes):
 
-    excel_file = scenarios_excel_file_name1
+    excel_file = CATALOG_SCENARIOS_PATH
 
     wb = load_workbook(excel_file)
     ws = wb.active
@@ -107,8 +107,8 @@ def save_to_excel(name, description, actor, weather, light, maneuver, road_topol
     df = pd.DataFrame(scenario_data, columns=multi_index_columns)
 
     # Define the file path for the Excel file
-    excel_file = scenarios_excel_file_name1
-
+    excel_file = CATALOG_SCENARIOS_PATH
+    os.makedirs(os.path.dirname(excel_file), exist_ok=True)
     # ✅ Safe write
     # ✅ If file exists, append to it
     if os.path.exists(excel_file):

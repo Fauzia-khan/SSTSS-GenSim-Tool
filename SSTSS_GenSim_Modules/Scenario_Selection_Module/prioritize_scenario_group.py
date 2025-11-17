@@ -1,11 +1,11 @@
 from modules.constants import scenarios_excel_file_name
 
 import pandas as pd
-
+from Scenario_Selection_Module import SELECTED_SCENARIO_BASEDon_ODD_PATH,PRIORITIZED_SCENARIO_GROUPS_US_PATH,PRIORITIZED_SCENARIO_GROUPS_EU_PATH
 # Function to prioritize the scenario groups based on the dataset (US, EU, etc.)
 def prioritize_scenario_groups(dataset='US'):
     #input_file = 'formulated_scenario_groups.xlsx'  # Replace with your file path
-    input_file = 'ODD_selected_scenarios.xlsx'
+    input_file = SELECTED_SCENARIO_BASEDon_ODD_PATH
     # Load the Excel file into a pandas DataFrame
     df = pd.read_excel(input_file)
 
@@ -44,32 +44,22 @@ def prioritize_scenario_groups(dataset='US'):
     }
 
     # Map the dataset to the correct priority order
-    if dataset == 'US':
+    if dataset.upper() == 'US':
         priority_order = priority_order_us
-    elif dataset == 'EU':
+        output_file = PRIORITIZED_SCENARIO_GROUPS_US_PATH
+    elif dataset.upper() == 'EU':
         priority_order = priority_order_eu
+        output_file = PRIORITIZED_SCENARIO_GROUPS_EU_PATH
     else:
         raise ValueError(f"Dataset {dataset} not supported.")
 
-    # Check if 'Scenario_Group' column exists
     if 'Scenario_Group' not in df.columns:
-        raise KeyError("The column 'Scenario_Group' does not exist in the Excel sheet.")
+        raise KeyError("The column 'Scenario_Group' does not exist.")
 
-    # Map the priority order to the 'Scenario Group' column
     df['Priority'] = df['Scenario_Group'].map(priority_order)
+    df_sorted = df.sort_values(by='Priority').drop(columns=['Priority'])
 
-    # Sort the DataFrame by the 'Priority' column (ascending)
-    df_sorted = df.sort_values(by='Priority')
-
-    # Drop the 'Priority' column since it's no longer needed
-    df_sorted = df_sorted.drop(columns=['Priority'])
-
-    # Save the sorted DataFrame back to an Excel file
-    output_file = f'prioritized_scenario_groups_{dataset.lower()}.xlsx'
     df_sorted.to_excel(output_file, index=False)
 
-    print(f"scenarios are prioritized, see file {output_file}")
-
-    # Optional: Display the first few rows of the sorted DataFrame
-    #print(df_sorted.head())
+    print(f"Scenarios are prioritized and saved to: {output_file}")
 

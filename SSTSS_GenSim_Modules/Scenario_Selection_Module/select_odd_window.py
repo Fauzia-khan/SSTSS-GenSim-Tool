@@ -3,7 +3,7 @@ from PyQt5.QtCore import Qt, pyqtSignal
 import pandas as pd
 from modules.constants import ODD_excel_file_name
 from PyQt5.QtCore import Qt
-
+from Scenario_Selection_Module import USER_SELECTED_ODD_PATH
 
 class SelectODDWindow(QDialog):
     odd_saved = pyqtSignal()
@@ -281,7 +281,7 @@ class SelectODDWindow(QDialog):
             df = pd.DataFrame([row], columns=columns)
 
             # Save the DataFrame to an Excel file with merged cells for the parent categories
-            file_path = ODD_excel_file_name
+            file_path = USER_SELECTED_ODD_PATH
             df.to_excel(file_path, index=True, merge_cells=True)
 
             print(f"ODD selections saved successfully to: {file_path}")

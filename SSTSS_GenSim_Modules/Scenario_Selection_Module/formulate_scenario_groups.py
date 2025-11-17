@@ -1,12 +1,12 @@
 import pandas as pd
 #from modules.constants import scenarios_excel_file_name
-
+from Scenario_Selection_Module import USER_SELECTED_SCENARIOS_PATH, CATALOG_SCENARIOS_PATH,FORMULATED_SCENARIOS_PATH
 import re
 
 def formulate_scenario_groups():
     # Load the Excel file into a pandas DataFrame
     #df = pd.read_excel('ODD_selected_scenarios.xlsx', header=[0, 1])  # Read multi-level headers
-    df = pd.read_excel('user_selected_scenarios_from_catalog.xlsx', header=[0, 1])  # Read multi-level headers
+    df = pd.read_excel(USER_SELECTED_SCENARIOS_PATH, header=[0, 1])  # Read multi-level headers
     # Flatten the MultiIndex columns by combining the two levels of column headers
     df.columns = ['_'.join(col).strip() for col in df.columns.values]
     df.columns.values[-1] = 'image'
@@ -71,7 +71,8 @@ def formulate_scenario_groups():
         df.at[index, 'Scenario_Group'] = scenario_group
 
     # Save the updated DataFrame back to the Excel file (or a new file)
-    output_file = 'formulated_scenario_groups.xlsx'
+
+    output_file = FORMULATED_SCENARIOS_PATH
     df.to_excel(output_file, index=False)
     print(f"scenarios are grouped to the formulated scenario groups in the SSTSS process, see file {output_file}")
 

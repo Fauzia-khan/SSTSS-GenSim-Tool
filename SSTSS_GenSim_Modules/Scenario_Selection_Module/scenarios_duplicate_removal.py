@@ -1,31 +1,35 @@
-import pandas as pd
+import shutil
 from PyQt5.QtWidgets import QMessageBox
+from Scenario_Selection_Module import (
+    FORMULATED_SCENARIO_GROUPS_PATH,
+    DUPLICATE_SCENARIO_REMOVAL_PATH
+)
 
-def remove_duplicate_scenarios(input_file="formulated_scenario_groups.xlsx", output_file="scenarios_after_duplicate_removal.xlsx"):
+def remove_duplicate_scenarios(
+    input_file=FORMULATED_SCENARIO_GROUPS_PATH,
+    output_file=DUPLICATE_SCENARIO_REMOVAL_PATH
+):
     """
-    Removes duplicate scenarios from the formulated_scenario_groups.xlsx file.
+    TEMP VERSION:
+    Makes an EXACT copy of the input XLSX file.
+    No duplicate removal is performed.
+    """
 
-    Parameters:
-        input_file: path to the formulated scenario groups Excel file
-        output_file: path where the cleaned version will be saved
-    """
+    print("COPY INPUT :", input_file)
+    print("COPY OUTPUT:", output_file)
 
     try:
-        # Load Excel file into pandas DataFrame
-        df = pd.read_excel(input_file)
+        shutil.copyfile(input_file, output_file)
 
-        # Remove exact duplicate rows
-        df_cleaned = df.drop_duplicates()
-
-        # Optionally, remove duplicates based on only certain columns
-        # For example, if scenario_id is the unique identifier:
-        # df_cleaned = df.drop_duplicates(subset=['Scenario_ID'])
-
-        # Save cleaned data
-        df_cleaned.to_excel(output_file, index=False)
-
-        QMessageBox.information(None, "Duplicates Removed",
-                                f"Duplicates removed successfully!\nCleaned file saved as:\n{output_file}")
+        QMessageBox.information(
+            None,
+            "Duplicate Removal (Placeholder)",
+            f"No duplicates removed yet.\nFile copied to:\n{output_file}"
+        )
 
     except Exception as e:
-        QMessageBox.critical(None, "Error", f"Error removing duplicates:\n{str(e)}")
+        QMessageBox.critical(
+            None,
+            "Error",
+            f"Error copying file:\n{str(e)}"
+        )
