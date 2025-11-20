@@ -90,10 +90,6 @@ Install required libraries (Python 3.8+ recommended):
 pip install -r requirements.txt
 ```
 
-If you don’t have a requirements.txt, use:
-```bash
-pip install pandas numpy matplotlib scipy openpyxl PyQt5 tabulate
-```
 ### 3. Install and Configure CARLA (for Simulation Execution)
 
 Download CARLA 0.9.13
