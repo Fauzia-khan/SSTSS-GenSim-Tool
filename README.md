@@ -2,6 +2,16 @@
 
 
 **SSTSS** -- Simulation-based Safety Testing Scenario Selection process is a scenario selection tool for prioritizing and selecting test scenarios for simulation-based safety testing of ADS.
+# SSTSS-GenSim: A Modular End-to-End Simulation Pipeline for Scenario-Based Safety Testing of ADS
+
+**Authors:**  
+Fauzia Khan, Hina Anwar, Deitmar Pfahl
+
+SSTSS-GenSim is a complete, modular, GUI-based framework that supports the *entire workflow* of Scenario-Based Safety Testing for Autonomous Driving Systems (ADS).  
+It automates scenario selection, configuration, simulation execution (CARLA + Autoware), data collection, safety-metric computation, visualization, and report generation.
+
+This tool extends the **SSTSS** (Simulation-based Safety Testing Scenario Selection) process by enabling users to run selected scenarios in simulation and evaluate them using standardized safety metrics.
+
 
 ---
 
@@ -42,6 +52,24 @@
 8. **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
 
 ---
+## System Architecture
+Excel Scenario File
+       ↓
+Scenario Configuration Module
+       ↓
+Scenario XML + Parameters
+       ↓
+Simulation Execution
+(CARLA + Autoware + ScenarioRunner)
+       ↓
+Data Collection Module
+       ↓
+Safety Evaluation Module
+       ↓
+Visualization & Report Module (GUI)
+       ↓
+ZIP Export of Results
+
 
 ## Installation
 
