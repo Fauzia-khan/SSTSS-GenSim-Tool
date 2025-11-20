@@ -60,7 +60,9 @@ def run_metrics():
         # --- 3. Copy scenario_summary.log into Safety_Evaluation_Module/results ---
         os.makedirs(SAFETY_RESULTS_DIR, exist_ok=True)
 
-        summary_src = os.path.join(RESULTS_DIR, "scenario_summary.log")
+        SCENARIO_RESULTS_DIR = os.path.join(SCENARIO_RUNNER_ROOT, "results", "test")
+
+        summary_src = os.path.join(SCENARIO_RESULTS_DIR, "scenario_summary.log")
         summary_dst = os.path.join(SAFETY_RESULTS_DIR, "scenario_summary.log")
 
         if os.path.exists(summary_src):

@@ -4,10 +4,10 @@ Hello from the pygame community. https://www.pygame.org/contribute.html
 Not all ego vehicles ready. Waiting ... 
 Preparing scenario: FollowLeadingVehicle_1
 ScenarioManager: Running scenario FollowLeadVehicle
-[LeadVehicleController] Initialized at Location(x=127.999802, y=133.426895, z=-0.002114)
-[LeadVehicleController] Reached cruising speed smoothly: 8.33 m/s
+[LeadVehicleController] Initialized at Location(x=137.999802, y=133.431366, z=-0.002114)
+[LeadVehicleController] Reached cruising speed smoothly: 11.11 m/s
 [LeadVehicleController] Triggering braking at 80 m!
-[LeadVehicleController] Starting braking... braking_distance=3.93 m, deceleration=8.83 m/s²
+[LeadVehicleController] Starting braking... braking_distance=6.99 m, deceleration=8.83 m/s²
 [LeadVehicleController] Vehicle stopped. Waiting...
 [LeadVehicleController] Terminated.
 [LeadVehicleController] Terminated.
@@ -22,15 +22,15 @@ Actor(id=206, type=vehicle.nissan.patrol);
 
  > Simulation Information
 ╒═════════════════════════════════╤═════════════════════╕
-│ Start Time                      │ 2025-11-20 12:06:07 │
+│ Start Time                      │ 2025-11-20 13:50:36 │
 ├─────────────────────────────────┼─────────────────────┤
-│ End Time                        │ 2025-11-20 12:06:36 │
+│ End Time                        │ 2025-11-20 13:51:01 │
 ├─────────────────────────────────┼─────────────────────┤
-│ Duration (System Time)          │ 29.3s               │
+│ Duration (System Time)          │ 24.93s              │
 ├─────────────────────────────────┼─────────────────────┤
-│ Duration (Game Time)            │ 60.05s              │
+│ Duration (Game Time)            │ 50.05s              │
 ├─────────────────────────────────┼─────────────────────┤
-│ Ratio (System Time / Game Time) │ 2.049s              │
+│ Ratio (System Time / Game Time) │ 2.007s              │
 ╘═════════════════════════════════╧═════════════════════╛
 
  > Criteria Information
@@ -39,7 +39,7 @@ Actor(id=206, type=vehicle.nissan.patrol);
 ├────────────────────────┼──────────────────────┼─────────┼──────────────┤
 │ lexus.utlexus (id=197) │ CollisionTest (Req.) │ SUCCESS │ 0            │
 ├────────────────────────┼──────────────────────┼─────────┼──────────────┤
-│                        │ Timeout (Req.)       │ FAILURE │ 60.05        │
+│                        │ Timeout (Req.)       │ FAILURE │ 50.05        │
 ╘════════════════════════╧══════════════════════╧═════════╧══════════════╛
  ===================================================================
 

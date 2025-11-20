@@ -16,7 +16,15 @@ AUTOWARE_WS_SETUP = os.path.expanduser("~/Documents/autoware_mini_ws/devel/setup
 # --------------------
 # Subdirectories
 # --------------------
-RESULTS_DIR = os.path.join(SCENARIO_RUNNER_ROOT, "results", "test")
+
+TOOL_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# Save results inside Data_Collection_Module/raw_data
+RESULTS_DIR = os.path.join(TOOL_ROOT, "Data_Collection_Module", "raw_data")
+
+# Create directory if not exists
+os.makedirs(RESULTS_DIR, exist_ok=True)
+#RESULTS_DIR = os.path.join(SCENARIO_RUNNER_ROOT, "results", "test")
 SCENARIO_XML = os.path.join(SCENARIO_RUNNER_ROOT, "srunner/examples/FollowLeadingVehicle.xml")
 SCENARIO_TEMPLATE_PATH = "scenario_files/python_files/template_follow_leading_vehicle.py"
 

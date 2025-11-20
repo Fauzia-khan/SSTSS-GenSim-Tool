@@ -100,7 +100,7 @@ Edit config.py inside the tool:
 TOOL_ROOT = "/path/to/SSTSS_GenSim_Modules"
 CARLA_ROOT = "/path/to/CARLA_0.9.13"
 SCENARIO_RUNNER_ROOT = "/path/to/scenario_runner"
-RESULTS_DIR = "/path/to/scenario_runner/results/test"
+RESULTS_DIR = "os.path.join(TOOL_ROOT, "Data_Collection_Module", "raw_data"
 
 ```
 6. Launch the Tool
