@@ -100,9 +100,8 @@ Download CARLA 0.9.13
 https://carla.org/
 
 Extract CARLA to your preferred location
-```bash
 Add CARLA PythonAPI to PYTHONPATH:
-
+```bash
 export PYTHONPATH=$PYTHONPATH:/path/to/CARLA_0.9.13/PythonAPI/carla/dist/carla-0.9.13-py3.8-linux-x86_64.egg
 export PYTHONPATH=$PYTHONPATH:/path/to/CARLA_0.9.13/PythonAPI/carla
 
@@ -117,9 +116,10 @@ git clone https://github.com/carla-simulator/scenario_runner.git
 
 ```
 Set the root path inside config.py:
-
+```bash
 SCENARIO_RUNNER_ROOT = "/home/user/scenario_runner"
 
+```
 5. Configure SSTSS-GenSim Tool Paths
 
 Edit config.py inside the tool:
