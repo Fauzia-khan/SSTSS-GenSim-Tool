@@ -14,7 +14,8 @@ It streamlines the complete workflow from scenario selection, scenario implement
 
 - **Scenario Selection Module**:
 
-- - **Scenario Implementation Module**:
+- **Scenario Implementation Module**:
+- **Scenario Configuration Module**:
   
   1. View all available scenarios.
   2. Select Operational Design Domains (ODDs).
