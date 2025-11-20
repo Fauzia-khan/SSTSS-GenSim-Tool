@@ -53,6 +53,7 @@ This tool extends the **SSTSS** (Simulation-based Safety Testing Scenario Select
 
 ---
 ## System Architecture
+
 Excel Scenario File
        ↓
 Scenario Configuration Module
@@ -60,7 +61,7 @@ Scenario Configuration Module
 Scenario XML + Parameters
        ↓
 Simulation Execution
-(CARLA + Autoware + ScenarioRunner)
+   (CARLA + Autoware + ScenarioRunner)
        ↓
 Data Collection Module
        ↓
@@ -69,6 +70,7 @@ Safety Evaluation Module
 Visualization & Report Module (GUI)
        ↓
 ZIP Export of Results
+
 
 
 ## Installation
