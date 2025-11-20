@@ -51,33 +51,7 @@ This tool extends the **SSTSS** (Simulation-based Safety Testing Scenario Select
 7. **Assign Prioritize Scenario** – Assign a priority to each sceanrio within each sceanrio group using the selected accident dataset.
 8. **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
 
----
-## System Architecture
 
-
-
-# ** System Architecture**
-
-```markdown
-## System Architecture
-
-
-Excel Scenario File
-       ↓
-Scenario Configuration Module
-       ↓
-Scenario XML + Parameters
-       ↓
-Simulation Execution
-   (CARLA + Autoware + ScenarioRunner)
-       ↓
-Data Collection Module
-       ↓
-Safety Evaluation Module
-       ↓
-Visualization & Report Module (GUI)
-       ↓
-ZIP Export of Results
 
 
 
