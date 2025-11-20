@@ -3,8 +3,8 @@
 
 
 # SSTSS-GenSim Tool
-SSTSS-GenSim is a Modular End-to-End Simulation Pipeline for Scenario-Based Safety Testing of ADS.
-
+SSSTSS-GenSim is a modular end-to-end pipeline for scenario-based safety testing of Autonomous Driving Systems (ADS).
+It streamlines the complete workflow from scenario selection,implementation, configuration, simulation execution, data collection, safety-metric evalaution,and  visualization and simualtion summary report generation.
 
 ---
 ## Features
@@ -114,8 +114,6 @@ python main.py
 **Authors:**  
 Fauzia Khan, Hina Anwar, Deitmar Pfahl
 
-SSTSS-GenSim is a complete, modular, GUI-based framework that supports the *entire workflow* of Scenario-Based Safety Testing for Autonomous Driving Systems (ADS).  
-It automates scenario selection, configuration, simulation execution (CARLA + Autoware), data collection, safety-metric computation, visualization, and report generation.
 
 This tool extends the **SSTSS** (Simulation-based Safety Testing Scenario Selection) process by enabling users to run selected scenarios in simulation and evaluate them using standardized safety metrics.
 
