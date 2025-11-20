@@ -29,7 +29,7 @@ It streamlines the complete workflow from scenario selection, scenario implement
 ## GUI for the Scenario Selection Module
 
 <p align="center">
-  <img src="InterfaceProject/images/Main_Window.png" alt="Main Window" width="600">
+  <img src="InterfaceProject/images/Main_WIndow.png" alt="Main Window" width="600">
 </p>
 
 ## Workflow
