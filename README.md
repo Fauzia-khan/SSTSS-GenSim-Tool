@@ -9,10 +9,10 @@ It streamlines the complete workflow from scenario selection, scenario implement
 ---
 ## Modules
 
-- **Scenario Catalog Selection** – Select between catalogs (US, Singapore, Europe, Other). By default, a Singapore catalog is preloaded.
-- **Custom Scenario catalog** –  Add your own scenario catalogs directly within the tool
 
 - **Scenario Selection Module**:
+- -**Scenario Catalog Selection** – Select between catalogs (US, Singapore, Europe, Other). By default, a Singapore catalog is preloaded.
+-- **Custom Scenario catalog** –  Add your own scenario catalogs directly within the tool
 
 - **Scenario Implementation Module**:
 - **Scenario Configuration Module**:
