@@ -59,3 +59,14 @@ def parse_scenario_tags(excel_filename, scenario_row):
         tag_data["Scenario Group"] = [scenario_group]
 
     return tag_data, light_condition
+def get_weather_type(tag_data):
+    if "Weather" not in tag_data:
+        return "dry"
+
+    weather_tags = [tag.lower() for tag in tag_data["Weather"]]
+
+    for w in ["dry", "rain", "snow", "fog"]:
+        if w in weather_tags:
+            return w
+
+    return "dry"

@@ -1,3 +1,4 @@
+
 import os
 import time
 import subprocess
@@ -15,9 +16,17 @@ from Data_Visualization_and_Report_Module.results_utils import (
     zip_results
 )
 from Data_Visualization_and_Report_Module.results_backup import backup_simulation_outputs
-from Scenario_Configuration_Module.weather_control import adjust_weather_condition
+from Scenario_Configuration_Module.weather_control import (
+    update_weather_and_light,
+    get_weather_type
+)
 from Scenario_Configuration_Module.excel_parser import parse_scenario_tags
+from Data_Visualization_and_Report_Module.plot_metrics import (
+    plot_speed_and_distance,
+    plot_jerk,
+)
 
+from Safety_Evaluation_Module.safety_metrices import process_latest_raw_file
 
 from config import RESULTS_DIR
 
@@ -63,9 +72,9 @@ class ViewInformationWindow(QDialog):
         road_topology_column_start, road_topology_column_end = 33, 35
         scenario_group_column = 38
 
-        tag_data, self.global_light_condition = parse_scenario_tags(excel_filename, scenario_row)
+        self.tag_data, self.global_light_condition = parse_scenario_tags(excel_filename, scenario_row)
 
-        for category, items in tag_data.items():
+        for category, items in self.tag_data.items():
             tag_layout.addRow(QLabel(f"<b>{category}</b>"), QLabel(""))
             for item in items:
                 tag_layout.addRow(QLabel(f"    {item}"), QLabel(""))
@@ -134,9 +143,26 @@ class ViewInformationWindow(QDialog):
             speed=other_vehicle_speed
         )
 
-        # 2. Update weather in XML scenario
-        if self.global_light_condition:
-            adjust_weather_condition(self.global_light_condition[0])
+        # ------------------------------------------
+        # 1) WEATHER + LIGHT UPDATE FROM EXCEL
+        # ------------------------------------------
+        from Scenario_Configuration_Module.weather_control import (
+            update_weather_and_light,
+            get_weather_type
+        )
+
+        # tag_data was created earlier in __init__, so use it from self
+        weather_type = get_weather_type(self.tag_data)
+        # FIX LIGHT CONDITION
+        raw_light = self.global_light_condition[0].strip().lower()
+        if raw_light in ["d", "day", "sunny", "light"]:
+            light = "Day"
+        else:
+            light = "Night"
+
+        print(f"[SIM] Applying Environment -> Weather: {weather_type}, Light: {light}")
+        update_weather_and_light(weather_type, light)
+        # ------------------------------------------
 
         # Start CARLA
         launch_carla()
@@ -148,7 +174,11 @@ class ViewInformationWindow(QDialog):
         results_dir = "/home/laima/Documents/scenario_runner-master/results/test"
         os.makedirs(results_dir, exist_ok=True)
         summary_log = os.path.join(results_dir, "scenario_summary.log")
-        runner_thread = threading.Thread(target=run_scenario_runner, args=(summary_log,))
+
+        runner_thread = threading.Thread(
+            target=run_scenario_runner,
+            args=(summary_log,)
+        )
         runner_thread.start()
 
         # Run set_goal
@@ -161,52 +191,48 @@ class ViewInformationWindow(QDialog):
         stop_autoware()
 
         # Run Metrics
-
         success = run_metrics()
         if success:
             self.show_results_button.setEnabled(True)
         else:
-
-            QMessageBox.warning(self, "Metrics Error", "Failed to compute metrics. See console for details.")
+            QMessageBox.warning(self, "Metrics Error",
+                                "Failed to compute metrics. See console for details.")
             return
 
     # ------------------- Results Display -------------------
 
     def show_results(self):
-        from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QScrollArea, QWidget, QPushButton, QFileDialog
+        from PyQt5.QtWidgets import (
+            QDialog, QVBoxLayout, QLabel, QScrollArea,
+            QWidget, QPushButton, QFileDialog, QMessageBox
+        )
+        from PyQt5.QtGui import QPixmap, QFont
+        from PyQt5.QtCore import Qt
 
-        #results_dir = "/home/laima/Documents/scenario_runner-master/results/test"
-        results_dir = RESULTS_DIR
-
-        if not os.path.exists(results_dir):
-            QMessageBox.warning(self, "Results Not Found", f"⚠️ Path does not exist:\n{results_dir}")
+        # ---- IMPORT VISUALIZATION CONTROLLER ----
+        try:
+            from Data_Visualization_and_Report_Module.visualization_controller \
+                import process_visualization, create_zip_for_download
+        except Exception as e:
+            QMessageBox.warning(self, "Import Error", f"Cannot load visualization module:\n{e}")
             return
 
-        # --------------------
-        # 1️⃣ Use helper: find latest timestamp
-        # --------------------
-        latest_ts = find_latest_result_timestamp(results_dir)
-        if not latest_ts:
-            QMessageBox.warning(self, "No Results", "⚠️ No valid results found")
+        # ---- RUN VISUALIZATION ----
+        result = process_visualization()
+
+        if not result:
+            QMessageBox.warning(self, "No Results", "No visualization data found.")
             return
 
-        # --------------------
-        # 2️⃣ Use helper: collect all result files
-        # --------------------
-        selected_files = get_result_files(results_dir, latest_ts)
+        # Get returned files from controller
+        speed_plot = result["plot_speed"]
+        jerk_plot = result["plot_jerk"]
+        summary_text = result["summary_text"]
+        summary_path = result["summary_path"]
+        all_files = result["all_files"]
+        timestamp = result["timestamp"]
 
-        # --------------------
-        # 3️⃣ Use helper: read summary log
-        # --------------------
-        summary_text, summary_path = read_summary_log(results_dir)
-
-        if not selected_files and not summary_text:
-            QMessageBox.warning(self, "No Results", "No result files found.")
-            return
-
-        # --------------------
-        # 4️⃣ GUI Code (unchanged)
-        # --------------------
+        # ---- GUI WINDOW ----
         dialog = QDialog(self)
         dialog.setWindowTitle("Simulation Report")
         dialog.resize(1000, 800)
@@ -215,17 +241,23 @@ class ViewInformationWindow(QDialog):
         container = QWidget()
         container_layout = QVBoxLayout(container)
 
-        # Display images
-        for f in selected_files:
-            if f.lower().endswith((".png", ".jpg", ".jpeg")):
-                pixmap = QPixmap(f)
-                if not pixmap.isNull():
-                    img_label = QLabel()
-                    img_label.setPixmap(pixmap.scaledToWidth(900, Qt.SmoothTransformation))
-                    img_label.setAlignment(Qt.AlignCenter)
-                    container_layout.addWidget(img_label)
+        # ---- DISPLAY SPEED PLOT ----
+        if os.path.exists(speed_plot):
+            pix = QPixmap(speed_plot)
+            lbl = QLabel()
+            lbl.setPixmap(pix.scaledToWidth(900, Qt.SmoothTransformation))
+            lbl.setAlignment(Qt.AlignCenter)
+            container_layout.addWidget(lbl)
 
-        # Display summary
+        # ---- DISPLAY JERK PLOT ----
+        if os.path.exists(jerk_plot):
+            pix2 = QPixmap(jerk_plot)
+            lbl2 = QLabel()
+            lbl2.setPixmap(pix2.scaledToWidth(900, Qt.SmoothTransformation))
+            lbl2.setAlignment(Qt.AlignCenter)
+            container_layout.addWidget(lbl2)
+
+        # ---- SUMMARY TEXT ----
         if summary_text:
             summary_label = QLabel(summary_text)
             summary_label.setFont(QFont("Courier", 10))
@@ -234,31 +266,28 @@ class ViewInformationWindow(QDialog):
             container_layout.addWidget(QLabel("---- Scenario Summary ----"))
             container_layout.addWidget(summary_label)
 
-        # --------------------
-        # 5️⃣ Use helper: zipping
-        # --------------------
+        # ---- DOWNLOAD BUTTON ----
         def download_all():
             save_path, _ = QFileDialog.getSaveFileName(
                 self,
                 "Save Results As",
-                f"simulation_results_{latest_ts}.zip",
+                f"simulation_results_{timestamp}.zip",
                 "Zip Files (*.zip)"
             )
             if save_path:
-                zip_results(save_path, selected_files, summary_path)
-                print(f"[✓] All files saved to {save_path}")
+                create_zip_for_download(save_path, all_files, summary_path)
+                QMessageBox.information(self, "Saved", f"Files saved to:\n{save_path}")
 
-        btn = QPushButton("Download Files")
+        btn = QPushButton("Download All Files")
         btn.clicked.connect(download_all)
         container_layout.addWidget(btn, alignment=Qt.AlignCenter)
 
+        # ---- SCROLL AREA ----
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setWidget(container)
         layout.addWidget(scroll)
         dialog.setLayout(layout)
         dialog.exec_()
-
-
 
 

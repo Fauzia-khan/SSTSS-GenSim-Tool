@@ -46,10 +46,80 @@
 ## Installation
 
 ### 1. Clone the Repository
-```bash
-git clone https://github.com/[[your-username]]/sstss-tool.git
-cd sstss-tool
+Installation
+1. Clone the Repository
+git clone https://github.com/<your-username>/SSTSS-GenSim.git
+cd SSTSS-GenSim
 
-### 2. Run the Application**
-```bash
+2. Install Python Dependencies
+
+Install required libraries (Python 3.8+ recommended):
+
+pip install -r requirements.txt
+
+
+If you don’t have a requirements.txt, use:
+
+pip install pandas numpy matplotlib scipy openpyxl PyQt5 tabulate
+
+3. Install and Configure CARLA (for Simulation Execution)
+
+Download CARLA 0.9.13
+https://carla.org/
+
+Extract CARLA to your preferred location
+
+Add CARLA PythonAPI to PYTHONPATH:
+
+export PYTHONPATH=$PYTHONPATH:/path/to/CARLA_0.9.13/PythonAPI/carla/dist/carla-0.9.13-py3.8-linux-x86_64.egg
+export PYTHONPATH=$PYTHONPATH:/path/to/CARLA_0.9.13/PythonAPI/carla
+
+
+(Replace paths with your system locations.)
+
+4. ScenarioRunner Installation
+
+Download ScenarioRunner (compatible with CARLA 0.9.13):
+
+git clone https://github.com/carla-simulator/scenario_runner.git
+
+
+Set the root path inside config.py:
+
+SCENARIO_RUNNER_ROOT = "/home/user/scenario_runner"
+
+5. Configure SSTSS-GenSim Tool Paths
+
+Edit config.py inside the tool:
+
+TOOL_ROOT = "/path/to/SSTSS_GenSim_Modules"
+CARLA_ROOT = "/path/to/CARLA_0.9.13"
+SCENARIO_RUNNER_ROOT = "/path/to/scenario_runner"
+RESULTS_DIR = "/path/to/scenario_runner/results/test"
+
+6. Launch the Tool
+
+Run the main GUI:
+
+python main.py
+
+
+Or if your entry script is different:
+
 python main_window.py
+
+7. Optional: Create Desktop Launcher
+
+To quickly open the tool:
+
+nano ~/.local/share/applications/sstss.desktop
+
+
+Paste:
+
+[Desktop Entry]
+Name=SSTSS-GenSim
+Exec=python /path/to/main.py
+Type=Application
+Terminal=false
+

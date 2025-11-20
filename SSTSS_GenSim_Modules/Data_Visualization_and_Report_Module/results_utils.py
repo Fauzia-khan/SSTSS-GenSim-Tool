@@ -24,7 +24,7 @@ def get_result_files(results_dir, timestamp):
         return selected
 
     for f in os.listdir(results_dir):
-        if timestamp in f and f.lower().endswith((".png", ".jpg", ".jpeg", ".csv")):
+        if timestamp in f and f.lower().endswith((".png", ".jpg", ".jpeg")):
             selected.append(os.path.join(results_dir, f))
 
     # Add log + json always if they exist

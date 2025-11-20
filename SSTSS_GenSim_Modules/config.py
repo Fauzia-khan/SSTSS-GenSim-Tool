@@ -29,3 +29,6 @@ PYTHONPATH_ENTRIES = [
     os.path.join(CARLA_ROOT, "PythonAPI/carla/agents"),
     os.path.join(CARLA_ROOT, "PythonAPI/carla")
 ]
+# Metrics configuration
+METRIC_FILE = "srunner/metrics/examples/velocity_and_distance_metric.py"
+RESULTS_LOG_DIR = RESULTS_DIR
