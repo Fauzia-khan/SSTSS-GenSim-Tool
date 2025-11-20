@@ -2,7 +2,7 @@
 
 
 
-# SSTSS-GenSim Tool# 
+# SSTSS-GenSim Tool
 SSTSS-GenSim is a Modular End-to-End Simulation Pipeline for Scenario-Based Safety Testing of ADS.
 
 
