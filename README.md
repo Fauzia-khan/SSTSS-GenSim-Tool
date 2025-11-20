@@ -71,6 +71,36 @@ Visualization & Report Module (GUI)
        ↓
 ZIP Export of Results
 
+✔ Preserves arrows  
+✔ Preserves indentation  
+✔ Looks clean in GitHub
+
+---
+
+# ✅ **OPTION 2 — Using HTML (Also stable)**
+
+```markdown
+## System Architecture
+
+<pre>
+Excel Scenario File
+       ↓
+Scenario Configuration Module
+       ↓
+Scenario XML + Parameters
+       ↓
+Simulation Execution
+   (CARLA + Autoware + ScenarioRunner)
+       ↓
+Data Collection Module
+       ↓
+Safety Evaluation Module
+       ↓
+Visualization & Report Module (GUI)
+       ↓
+ZIP Export of Results
+</pre>
+
 
 
 ## Installation
