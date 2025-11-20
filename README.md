@@ -7,12 +7,15 @@ SSSTSS-GenSim is a modular end-to-end pipeline for scenario-based safety testing
 It streamlines the complete workflow from scenario selection, scenario implementation, scenario configuration, simulation, data collection, safety-metric evalaution, and visualization and simulation summary report generation.
 
 ---
-## Features
+## Modules
 
 - **Scenario Catalog Selection** – Select between catalogs (US, Singapore, Europe, Other). By default, a Singapore catalog is preloaded.
 - **Custom Scenario catalog** –  Add your own scenario catalogs directly within the tool
 
-- **Scenario Selection**:
+- **Scenario Selection Module**:
+
+- - **Scenario Implementation Module**:
+  
   1. View all available scenarios.
   2. Select Operational Design Domains (ODDs).
   3. Filter scenarios based on ODD selection.
