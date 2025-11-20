@@ -74,44 +74,48 @@ ZIP Export of Results
 ## Installation
 
 ### 1. Clone the Repository
-Installation
-1. Clone the Repository
+```bash
+
 git clone https://github.com/<your-username>/SSTSS-GenSim.git
 cd SSTSS-GenSim
+```
 
-2. Install Python Dependencies
+
+
+### 2. Install Python Dependencies
 
 Install required libraries (Python 3.8+ recommended):
 
+```bash
 pip install -r requirements.txt
-
+```
 
 If you don’t have a requirements.txt, use:
-
+```bash
 pip install pandas numpy matplotlib scipy openpyxl PyQt5 tabulate
-
-3. Install and Configure CARLA (for Simulation Execution)
+```
+### 3. Install and Configure CARLA (for Simulation Execution)
 
 Download CARLA 0.9.13
 https://carla.org/
 
 Extract CARLA to your preferred location
-
+```bash
 Add CARLA PythonAPI to PYTHONPATH:
 
 export PYTHONPATH=$PYTHONPATH:/path/to/CARLA_0.9.13/PythonAPI/carla/dist/carla-0.9.13-py3.8-linux-x86_64.egg
 export PYTHONPATH=$PYTHONPATH:/path/to/CARLA_0.9.13/PythonAPI/carla
 
-
+```
 (Replace paths with your system locations.)
 
-4. ScenarioRunner Installation
+### 4. ScenarioRunner Installation
 
 Download ScenarioRunner (compatible with CARLA 0.9.13):
-
+```bash
 git clone https://github.com/carla-simulator/scenario_runner.git
 
-
+```
 Set the root path inside config.py:
 
 SCENARIO_RUNNER_ROOT = "/home/user/scenario_runner"
