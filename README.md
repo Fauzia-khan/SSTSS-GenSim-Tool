@@ -16,6 +16,11 @@ It streamlines the complete workflow from scenario selection, scenario implement
 
 - **Scenario Implementation Module**:
 - **Scenario Configuration Module**:
+- **Simulator and ADS Integration Module Module**:
+- **Scenario Execution Module**:
+- **Data Collection Module**:
+- **Safety Evaluation Module**:
+- **Data Visualization and Report Module**:
   
   1. View all available scenarios.
   2. Select Operational Design Domains (ODDs).
