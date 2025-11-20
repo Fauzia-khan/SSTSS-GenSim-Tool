@@ -123,35 +123,19 @@ SCENARIO_RUNNER_ROOT = "/home/user/scenario_runner"
 5. Configure SSTSS-GenSim Tool Paths
 
 Edit config.py inside the tool:
-
+```bash
 TOOL_ROOT = "/path/to/SSTSS_GenSim_Modules"
 CARLA_ROOT = "/path/to/CARLA_0.9.13"
 SCENARIO_RUNNER_ROOT = "/path/to/scenario_runner"
 RESULTS_DIR = "/path/to/scenario_runner/results/test"
 
+```
 6. Launch the Tool
 
 Run the main GUI:
-
+```bash
 python main.py
 
+```
 
-Or if your entry script is different:
-
-python main_window.py
-
-7. Optional: Create Desktop Launcher
-
-To quickly open the tool:
-
-nano ~/.local/share/applications/sstss.desktop
-
-
-Paste:
-
-[Desktop Entry]
-Name=SSTSS-GenSim
-Exec=python /path/to/main.py
-Type=Application
-Terminal=false
 
