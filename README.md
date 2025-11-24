@@ -29,17 +29,17 @@ iv. **Select Simulator** – Choose the simulator.(Currently you can select CARL
 
 _Output._ --> Final list of Test Scenarios.xlsx
 
-**2. Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their behaviors. _Output_ --> (<scenarioname.py>)
+**2. Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their behaviors.   _Output_ --> (<scenarioname.py>)
 
 **3. Scenario Configuration Module:** Configures the simulation environment and applies the selected input parameters in <scenario_name.py>.   _Output_ --> (<scenarioname.xml>) 
 
-**4. Simulator and ADS Integration Module:** Sets up the simulation environment, including CARLA, ScenarioRunner, and Autoware-mini.  _Output_ --> (simulation setup is ready)
+**4. Simulator and ADS Integration Module:** Sets up the simulation environment, including CARLA, ScenarioRunner, and Autoware-mini.   _Output_ --> (simulation setup is ready)
 
-**5. Scenario Execution Module:** Runs the configured scenario in CARLA using the integrated simulation setup.  _Output_ --> (<scenarioname.log>)  and _Output_ --> (<scenarioname.json>)
+**5. Scenario Execution Module:** Runs the configured scenario in CARLA using the integrated simulation setup.   _Output_ --> (<scenarioname.log>)  and _Output_ --> (<scenarioname.json>)
 
-**6. Data Collection Module:** Captures all relevant simulation outputs, including timestamps, positions, and speeds of all actors. _Output_ --> (<scenarioname_data.csv>)
+**6. Data Collection Module:** Captures all relevant simulation outputs, including timestamps, positions, and speeds of all actors.   _Output_ --> (<scenarioname_data.csv>)
 
-**7. Safety Metrics Evaluation Module:** Computes the safety metrics for assessing ADS performance.  _Output_ --> (<scenarioname_metrices.py>)
+**7. Safety Metrics Evaluation Module:** Computes the safety metrics for assessing ADS performance.    _Output_ --> (<scenarioname_metrices.py>)
 
 **8. Data Visualization and Report Module:** Generates plots, summary reports, based on the collected data. _Output_ --> (<scenario_name_metrice.png>)  and _Output_ --> (<scenarioname_summary.txt>)
 
