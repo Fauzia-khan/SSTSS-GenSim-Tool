@@ -18,16 +18,15 @@ It streamlines the complete workflow from scenario selection, scenario implement
  **Launch the Tool** – Run the main Python script.
 ** 1. Scenario Selection Module:** Prioritze and selects the test sceanrio based on SSTSS process. It takes four inputs:
 
-i. **Select Catalog** – Choose the dataset region (US, Singapore, Other).
-     - **View / Add Scenarios** – Add new scenario or browse existing ones.
-     
+i. **Select Catalog** – Choose the dataset region (US, Singapore, Other). 
+         
 ii. **Select ODD** – Narrow down scenarios based on operational design domain, i.e, (Dynamic, Environmental, Scenery ).
 
 iii. **Select Dataset** –  Choose the dataset US or Europe Singapore.
 
 iv. **Select Simulator** – Choose the simulator.(Currently you can select CARLA)
 
-Output. **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
+_Output._ **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
 **Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their behaviors. Output --> (<scenario_name.py>)
 
 **Scenario Configuration Module:** Configures the simulation environment and applies the selected input parameters.
