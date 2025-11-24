@@ -139,7 +139,7 @@ python main.py
 ```
 ----
 **Authors:**  
-Fauzia Khan, Hina Anwar, Deitmar Pfahl, "SSTSS-GenSim: A Modular Tool Chain for End-to-End Safety Evaluation of Automated Driving Systems".
+Fauzia Khan, Ali Ihsan Gullu, Hina Anwar, Deitmar Pfahl, "SSTSS-GenSim: A Modular Tool Chain for End-to-End Safety Evaluation of Automated Driving Systems".
 
 ---
 
