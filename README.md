@@ -28,7 +28,7 @@ iv. **Select Simulator** – Choose the simulator.(Currently you can select CARL
 
 _Output._ **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
 
-**2. Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their behaviors. Output --> (<scenario_name.py>)
+**2. Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their behaviors. _Output_ --> (<scenario_name.py>)
 
 **3. Scenario Configuration Module:** Configures the simulation environment and applies the selected input parameters.
 
