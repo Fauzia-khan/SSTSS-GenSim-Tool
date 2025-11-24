@@ -24,19 +24,19 @@ iii. **Select Dataset** –  Choose the dataset US or Europe Singapore.
 iv. **Select Simulator** – Choose the simulator.(Currently you can select CARLA)
 
 Output. **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
-Scenario Implementation Module: Converts the top-prioritized scenario into a Python script (<scenario_name.py>) that defines the actors and their behaviors.
+**Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their behaviors. Output --> (<scenario_name.py>)
 
-Scenario Configuration Module: Configures the simulation environment and applies the selected input parameters.
+**Scenario Configuration Module:** Configures the simulation environment and applies the selected input parameters.
 
-Simulator and ADS Integration Module: Sets up the simulation environment, including CARLA, ScenarioRunner, and Autoware-mini.
+**Simulator and ADS Integration Module:** Sets up the simulation environment, including CARLA, ScenarioRunner, and Autoware-mini.
 
-Scenario Execution Module: Runs the configured scenario in CARLA using the integrated simulation setup.
+**Scenario Execution Module:** Runs the configured scenario in CARLA using the integrated simulation setup.
 
-Data Collection Module: Captures all relevant simulation outputs, including timestamps, positions, and speeds of all actors.
+**Data Collection Module:** Captures all relevant simulation outputs, including timestamps, positions, and speeds of all actors.
 
-Safety Metrics Evaluation Module: Computes the safety metrics for assessing ADS performance.
+**Safety Metrics Evaluation Module:** Computes the safety metrics for assessing ADS performance.
 
-Data Visualization and Report Module: Generates plots, summary reports, based on the collected data.
+**Data Visualization and Report Module:** Generates plots, summary reports, based on the collected data.
 
 
 Organizes and stores output files for each parameter configuration in a structured format for analysis.
