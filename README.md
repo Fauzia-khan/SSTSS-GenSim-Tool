@@ -7,33 +7,6 @@ SSSTSS-GenSim is a modular end-to-end pipeline for scenario-based safety testing
 It streamlines the complete workflow from scenario selection, scenario implementation, scenario configuration, simulation, data collection, safety-metric evalaution, and visualization and simulation summary report generation.
 
 ---
-## Modules
-
-
-- **Scenario Selection Module**:
-  -**Scenario Catalog Selection** – Select between catalogs (US, Singapore, Europe, Other). By default, a Singapore catalog is preloaded.
-   -**Custom Scenario catalog** –  Add your own scenario catalogs directly within the tool
-
-- **Scenario Implementation Module**:
-- **Scenario Configuration Module**:
-- **Simulator and ADS Integration Module Module**:
-- **Scenario Execution Module**:
-- **Data Collection Module**:
-- **Safety Evaluation Module**:
-- **Data Visualization and Report Module**:
-  
-  1. View all available scenarios.
-  2. Select Operational Design Domains (ODDs).
-  3. Filter scenarios based on ODD selection.
-  4. Assign scenarios to scenario groups.
-  5. Prioritize scenario groups for testing using the US or EU accident dataset.
-  6. Filter scenarios by simulator compatibility (Carla, Gazebo, LGSVL).
-  7. Assign a priority to each selected sceanrio within each scenario group using the US or EU dataset. 
-- **Excel-based Storage** – Reads and updates scenario datasets stored in `.xlsx` format.
-  
-- **Modular Design** – Separate scripts for each functional component.
-
----
 
 ## GUI for the Scenario Selection Module
 
@@ -51,9 +24,6 @@ It streamlines the complete workflow from scenario selection, scenario implement
 6. **Filter by Simulator** – Keep only scenarios compatible with a selected simulator.
 7. **Assign Prioritize Scenario** – Assign a priority to each sceanrio within each sceanrio group using the selected accident dataset.
 8. **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
-
-
-
 
 
 
@@ -89,8 +59,31 @@ export PYTHONPATH=$PYTHONPATH:/path/to/CARLA_0.9.13/PythonAPI/carla
 
 ```
 (Replace paths with your system locations.)
+### 4. Autoware_mini Installation 
+Clone the repository into your ROS workspace:
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/UT-ADL/autoware_mini.git
+```
+Install dependencies:
+```bash
+rosdep install --from-paths . --ignore-src -r -y
+```
+Build:
+```bash
+bash
+cd ~/catkin_ws
+catkin_make
+```
+Source the workspace:
+```bash
+bash
+source ~/catkin_ws/devel/setup.bash
+```
+For complete instructions, refer to:
+https://github.com/UT-ADL/autoware_mini
 
-### 4. ScenarioRunner Installation
+### 5. ScenarioRunner Installation
 
 Download ScenarioRunner (compatible with CARLA 0.9.13):
 ```bash
