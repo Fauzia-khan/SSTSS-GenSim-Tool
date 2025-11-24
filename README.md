@@ -16,7 +16,8 @@ It streamlines the complete workflow from scenario selection, scenario implement
 
 ## Workflow
  **Launch the Tool** – Run the main Python script.
-** 1. Scenario Selection Module:** Prioritze and selects the test sceanrio based on SSTSS process. It takes four inputs:
+ 
+**1. Scenario Selection Module:** – Prioritze and selects the test sceanrio based on SSTSS process. It takes four inputs:
 
 i. **Select Catalog** – Choose the dataset region (US, Singapore, Other). 
          
