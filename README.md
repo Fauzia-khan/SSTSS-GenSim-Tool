@@ -27,7 +27,7 @@ iii. **Select Dataset** –  Choose the dataset US or Europe Singapore.
 
 iv. **Select Simulator** – Choose the simulator.(Currently you can select CARLA)
 
-_Output._ **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
+_Output._ --> Final list of Test Scenarios.xlsx
 
 **2. Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their behaviors. _Output_ --> (<scenarioname.py>)
 
