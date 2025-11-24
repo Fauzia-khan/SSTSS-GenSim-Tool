@@ -15,15 +15,15 @@ It streamlines the complete workflow from scenario selection, scenario implement
 </p>
 
 ## Workflow
-
+Scenario Selection Module:
 1. **Launch the Tool** – Run the main Python script.
-2. **Select Catalog** – Choose the dataset region (US, Singapore, Europe, Other).
+2. **Select Catalog** – Choose the dataset region (US, Singapore, Other).
 3. **View / Add Scenarios** – Add new scenario or browse existing ones.
 4. **Select ODD** – Narrow down scenarios based on operational design domain, i.e, (Dynamic, Environmental, Scenery ).
-5. **Assign & Prioritize** – Prioritize the sceanrio groups based on the selected accident dataset.
-6. **Filter by Simulator** – Keep only scenarios compatible with a selected simulator.
-7. **Assign Prioritize Scenario** – Assign a priority to each sceanrio within each sceanrio group using the selected accident dataset.
-8. **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
+5. **Select Dataset** –  Choose the dataset US or Europe Singapore.
+6. **Select Simulator** – Choose the simulator.(Currently you can select CARLA)
+
+Output. **Final list of Test Scenarios** – List of test scenarios for testing or simulation.
 
 
 
@@ -114,11 +114,7 @@ python main.py
 ```
 ----
 **Authors:**  
-Fauzia Khan, Hina Anwar, Deitmar Pfahl
-
-
-This tool extends the **SSTSS** (Simulation-based Safety Testing Scenario Selection) process by enabling users to run selected scenarios in simulation and evaluate them using standardized safety metrics.
-
+Fauzia Khan, Hina Anwar, Deitmar Pfahl, "SSTSS-GenSim: A Modular Tool Chain for End-to-End Safety Evaluation of Automated Driving Systems".
 
 ---
 
