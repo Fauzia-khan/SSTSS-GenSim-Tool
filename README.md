@@ -29,25 +29,25 @@ iv. **Select Simulator** – Choose the simulator.(Currently you can select CARL
 
 _Output._ --> Final list of Test Scenarios.xlsx
 
-**2. Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their behaviors. 
+**2. Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their behaviors. <br>
 _Output_ --> (<scenarioname.py>)
 
-**3. Scenario Configuration Module:** Configures the simulation environment and applies the selected input parameters in <scenario_name.py>. 
+**3. Scenario Configuration Module:** Configures the simulation environment and applies the selected input parameters in <scenario_name.py>. <br>
 _Output_ --> (<scenarioname.xml>) 
 
-**4. Simulator and ADS Integration Module:** Sets up the simulation environment, including CARLA, ScenarioRunner, and Autoware-mini. 
+**4. Simulator and ADS Integration Module:** Sets up the simulation environment, including CARLA, ScenarioRunner, and Autoware-mini. <br>
 _Output_ --> (simulation setup is ready)
 
-**5. Scenario Execution Module:** Runs the configured scenario in CARLA using the integrated simulation setup. 
+**5. Scenario Execution Module:** Runs the configured scenario in CARLA using the integrated simulation setup. <br>
 _Output_ --> (<scenarioname.log>)  and _Output_ --> (<scenarioname.json>)
 
-**6. Data Collection Module:** Captures all relevant simulation outputs, including timestamps, positions, and speeds of all actors.
+**6. Data Collection Module:** Captures all relevant simulation outputs, including timestamps, positions, and speeds of all actors.<br>
 _Output_ --> (<scenarioname_data.csv>)
 
-**7. Safety Metrics Evaluation Module:** Computes the safety metrics for assessing ADS performance.  
+**7. Safety Metrics Evaluation Module:** Computes the safety metrics for assessing ADS performance.  <br>
 _Output_ --> (<scenarioname_metrices.py>)
 
-**8. Data Visualization and Report Module:** Generates plots, summary reports, based on the collected data.
+**8. Data Visualization and Report Module:** Generates plots, summary reports, based on the collected data.<br>
 _Output_ --> (<scenario_name_metrice.png>)  and _Output_ --> (<scenarioname_summary.txt>)
 
 
