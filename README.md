@@ -58,7 +58,11 @@ _Output_ --> (<scenario_name_metrice.png>)  and _Output_ --> (<scenarioname_summ
 ```bash
 
 git clone https://github.com/<your-username>/SSTSS-GenSim.git
-cd SSTSS-GenSim
+cd SSTSS_GenSim_Modules
+source venv/bin/activate
+python main.py
+
+
 ```
 
 
