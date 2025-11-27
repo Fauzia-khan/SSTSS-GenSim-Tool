@@ -4,10 +4,10 @@ Hello from the pygame community. https://www.pygame.org/contribute.html
 Not all ego vehicles ready. Waiting ... 
 Preparing scenario: FollowLeadingVehicle_1
 ScenarioManager: Running scenario FollowLeadVehicle
-[LeadVehicleController] Initialized at Location(x=137.999802, y=133.431366, z=-0.002114)
-[LeadVehicleController] Reached cruising speed smoothly: 11.11 m/s
+[LeadVehicleController] Initialized at Location(x=147.999802, y=133.435715, z=0.582400)
+[LeadVehicleController] Reached cruising speed smoothly: 2.78 m/s
 [LeadVehicleController] Triggering braking at 80 m!
-[LeadVehicleController] Starting braking... braking_distance=6.99 m, deceleration=8.83 m/s²
+[LeadVehicleController] Starting braking... braking_distance=0.44 m, deceleration=8.83 m/s²
 [LeadVehicleController] Vehicle stopped. Waiting...
 [LeadVehicleController] Terminated.
 [LeadVehicleController] Terminated.
@@ -15,32 +15,32 @@ ScenarioManager: Running scenario FollowLeadVehicle
  ======= Results of Scenario: FollowLeadVehicle ---- TIMEOUT =======
 
  > Ego vehicles:
-Actor(id=197, type=vehicle.lexus.utlexus); 
+Actor(id=1625, type=vehicle.lexus.utlexus); 
 
  > Other actors:
-Actor(id=206, type=vehicle.nissan.patrol); 
+Actor(id=1634, type=vehicle.nissan.patrol); 
 
  > Simulation Information
 ╒═════════════════════════════════╤═════════════════════╕
-│ Start Time                      │ 2025-11-20 13:50:36 │
+│ Start Time                      │ 2025-11-26 13:14:07 │
 ├─────────────────────────────────┼─────────────────────┤
-│ End Time                        │ 2025-11-20 13:51:01 │
+│ End Time                        │ 2025-11-26 13:14:37 │
 ├─────────────────────────────────┼─────────────────────┤
-│ Duration (System Time)          │ 24.93s              │
+│ Duration (System Time)          │ 29.74s              │
 ├─────────────────────────────────┼─────────────────────┤
-│ Duration (Game Time)            │ 50.05s              │
+│ Duration (Game Time)            │ 60.05s              │
 ├─────────────────────────────────┼─────────────────────┤
-│ Ratio (System Time / Game Time) │ 2.007s              │
+│ Ratio (System Time / Game Time) │ 2.019s              │
 ╘═════════════════════════════════╧═════════════════════╛
 
  > Criteria Information
-╒════════════════════════╤══════════════════════╤═════════╤══════════════╕
-│ Actor                  │ Criterion            │ Result  │ Actual Value │
-├────────────────────────┼──────────────────────┼─────────┼──────────────┤
-│ lexus.utlexus (id=197) │ CollisionTest (Req.) │ SUCCESS │ 0            │
-├────────────────────────┼──────────────────────┼─────────┼──────────────┤
-│                        │ Timeout (Req.)       │ FAILURE │ 50.05        │
-╘════════════════════════╧══════════════════════╧═════════╧══════════════╛
+╒═════════════════════════╤══════════════════════╤═════════╤══════════════╕
+│ Actor                   │ Criterion            │ Result  │ Actual Value │
+├─────────────────────────┼──────────────────────┼─────────┼──────────────┤
+│ lexus.utlexus (id=1625) │ CollisionTest (Req.) │ SUCCESS │ 0            │
+├─────────────────────────┼──────────────────────┼─────────┼──────────────┤
+│                         │ Timeout (Req.)       │ FAILURE │ 60.05        │
+╘═════════════════════════╧══════════════════════╧═════════╧══════════════╛
  ===================================================================
 
 Not all scenario tests were successful
