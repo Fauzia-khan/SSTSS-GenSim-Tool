@@ -74,21 +74,11 @@ python -m venv venv
 # Linux
 source venv/bin/activate
 
-# 5. Install Python dependencies
+# 5. Install Python dependencies(Python 3.8+ recommended)
 pip install -r requirements.txt
 
 # 6. Run the main tool
 python main.py
-```
-
-
-
-### 2. Install Python Dependencies
-
-Install required libraries (Python 3.8+ recommended):
-
-```bash
-pip install -r requirements.txt
 ```
 
 ### 3. Install and Configure CARLA (for Simulation Execution)
