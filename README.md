@@ -136,7 +136,7 @@ python -m venv venv
 # Linux
 source venv/bin/activate
 
-# 5. Install Python dependencies(Python 3.8+ recommended)
+# 5. Install Python dependencies (Python 3.8+ recommended)
 pip install -r requirements.txt
 
 # 6. Run the main tool
