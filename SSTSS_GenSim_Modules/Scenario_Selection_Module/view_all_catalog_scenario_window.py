@@ -285,7 +285,7 @@ class ViewAllScenariosWindow(QDialog):
                 form_layout.addRow("Name:", QLabel(scenario["name"]))
                 form_layout.addRow("Description:", QLabel(scenario["description"]))
                 form_layout.addRow("Catalog:", QLabel(scenario["catalog"]))
-                print('CHECKPINT 11')
+                #print('CHECKPINT 11')
                 if scenario["image_path"]:
                     image_item = QLabel()
                     print('image path: ', os.getcwd() + 'images/' + scenario["image_path"])
@@ -414,7 +414,7 @@ class ViewAllScenariosWindow(QDialog):
         try:
             from Scenario_Selection_Module.formulate_scenario_groups import formulate_scenario_groups
             formulate_scenario_groups()  # This will process filtered_scenarios.xlsx
-            QMessageBox.information(self, "Grouping Done", "Scenario groups have been formulated successfully.")
+            #QMessageBox.information(self, "Grouping Done", "Scenario groups have been formulated successfully.")
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error while grouping scenarios:\n{str(e)}")
         try:

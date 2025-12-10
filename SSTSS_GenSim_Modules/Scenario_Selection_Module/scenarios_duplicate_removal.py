@@ -33,3 +33,4 @@ def remove_duplicate_scenarios(
             "Error",
             f"Error copying file:\n{str(e)}"
         )
+

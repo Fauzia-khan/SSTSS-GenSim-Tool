@@ -22,7 +22,7 @@ class SelectScenarioWindow(QDialog):
         self.setWindowTitle("List of Selected Scenarios")
         self.setGeometry(300, 200, 500, 300)
         self.setStyleSheet("background-color: #e9f0fa;")
-        self.setMinimumSize(500, 300)
+        self.setMinimumSize(500, 500)
 
         # Scroll area setup
         scroll_area = QScrollArea(self)
@@ -90,6 +90,7 @@ class SelectScenarioWindow(QDialog):
 
             # View button
             view_btn = QPushButton("View")
+            view_btn.setFixedWidth(80)
             view_btn.clicked.connect(partial(self.view_button_callback, scenario_view_counter))
             form_layout.addRow("", view_btn)
 
