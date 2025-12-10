@@ -51,6 +51,10 @@ _Output_ --> (<scenarioname_metrices.py>)
 _Output_ --> (<scenario_name_metrice.png>)  and _Output_ --> (<scenarioname_summary.txt>)
 
 
+## Requirements
+The SSTSS-GenSim Tool requires a Linux-based environment with ROS and a supported simulator. The recommended Supported Operating System is Ubuntu 20.04 LTS (recommended)
+Windows is not supported because key components (Autoware_mini) do not run natively on Windows.
+
 
 ## Installation
 
@@ -58,7 +62,7 @@ _Output_ --> (<scenario_name_metrice.png>)  and _Output_ --> (<scenarioname_summ
 ```bash
 
 git clone https://github.com/<your-username>/SSTSS-GenSim.git
-cd SSTSS_GenSim_Modules
+cd SSTSS_GenSim_Tool
 source venv/bin/activate
 python main.py
 
