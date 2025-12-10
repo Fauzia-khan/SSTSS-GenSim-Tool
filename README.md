@@ -116,16 +116,10 @@ SCENARIO_RUNNER_ROOT = "/path/to/scenario_runner"
 RESULTS_DIR = "os.path.join(TOOL_ROOT, "Data_Collection_Module", "raw_data"
 
 ```
-6. Launch the Tool
 
-Run the main GUI:
-```bash
-python main.py
 
-```
-----
 
-### Install the SSTSS-GenSim-Tool
+### 4. Install the SSTSS-GenSim-Tool
 ### 1. Clone the Repository
 ```bash
 
