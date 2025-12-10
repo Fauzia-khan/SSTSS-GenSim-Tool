@@ -119,7 +119,7 @@ RESULTS_DIR = "os.path.join(TOOL_ROOT, "Data_Collection_Module", "raw_data"
 
 
 
-### 4. Install the SSTSS-GenSim-Tool
+### 4. SSTSS-GenSim-Tool Installation
 ### 1. Clone the Repository
 ```bash
 
