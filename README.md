@@ -146,7 +146,7 @@ python main.py
 ## Demo Video
 [Click here to watch the tool demo video](https://drive.google.com/file/d/1XPXzFDNAYXQR10g7PQslKZQKBmrmNhln/view?usp=sharing)
 
-**Authors:**  
+## Authors
 Fauzia Khan, Ali Ihsan GÜllÜ, Hina Anwar, Deitmar Pfahl, "SSTSS-GenSim: A Modular Tool Chain for End-to-End Safety Evaluation of Automated Driving Systems".
 
 ---
