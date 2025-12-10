@@ -61,12 +61,23 @@ Windows is not supported because key components (Autoware_mini) do not run nativ
 ### 1. Clone the Repository
 ```bash
 
-git clone https://github.com/<your-username>/SSTSS-GenSim.git
-cd SSTSS_GenSim_Tool
+# 1. Clone the repository
+git clone https://github.com/<your-username>/SSTSS-GenSim-Tool.git
+# 2. Navigate into the project directory
+cd SSTSS-GenSim-Tool/SSTSS_GenSim_Modules
+
+# 3. Create a Python virtual environment (first time only)
+python -m venv venv
+
+# 4. Activate the virtual environment
+# Linux / Mac:
 source venv/bin/activate
+
+# 5. Install Python dependencies
+pip install -r requirements.txt
+
+# 6. Run the main tool
 python main.py
-
-
 ```
 
 
