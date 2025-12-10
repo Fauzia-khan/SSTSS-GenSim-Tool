@@ -57,31 +57,7 @@ Windows is not supported because key components (Autoware_mini) do not run nativ
 
 
 ## Installation
-
-### 1. Clone the Repository
-```bash
-
-# 1. Clone the repository
-git clone https://github.com/<your-username>/SSTSS-GenSim-Tool.git
-
-# 2. Navigate into the project directory
-cd SSTSS-GenSim-Tool/SSTSS_GenSim_Modules
-
-# 3. Create a Python virtual environment (first time only)
-python -m venv venv
-
-# 4. Activate the virtual environment
-# Linux
-source venv/bin/activate
-
-# 5. Install Python dependencies(Python 3.8+ recommended)
-pip install -r requirements.txt
-
-# 6. Run the main tool
-python main.py
-```
-
-### 3. Install and Configure CARLA (for Simulation Execution)
+### 1. Install and Configure CARLA (for Simulation Execution)
 
 Download CARLA 0.9.13
 https://carla.org/
@@ -94,7 +70,7 @@ export PYTHONPATH=$PYTHONPATH:/path/to/CARLA_0.9.13/PythonAPI/carla
 
 ```
 (Replace paths with your system locations.)
-### 4. Autoware_mini Installation 
+### 2. Autoware_mini Installation 
 Clone the repository into your ROS workspace:
 ```bash
 cd ~/catkin_ws/src
@@ -118,7 +94,7 @@ source ~/catkin_ws/devel/setup.bash
 For complete instructions, refer to:
 https://github.com/UT-ADL/autoware_mini
 
-### 5. ScenarioRunner Installation
+### 3. ScenarioRunner Installation
 
 Download ScenarioRunner (compatible with CARLA 0.9.13):
 ```bash
@@ -148,6 +124,31 @@ python main.py
 
 ```
 ----
+
+### Install the SSTSS-GenSim-Tool
+### 1. Clone the Repository
+```bash
+
+# 1. Clone the repository
+git clone https://github.com/<your-username>/SSTSS-GenSim-Tool.git
+
+# 2. Navigate into the project directory
+cd SSTSS-GenSim-Tool/SSTSS_GenSim_Modules
+
+# 3. Create a Python virtual environment (first time only)
+python -m venv venv
+
+# 4. Activate the virtual environment
+# Linux
+source venv/bin/activate
+
+# 5. Install Python dependencies(Python 3.8+ recommended)
+pip install -r requirements.txt
+
+# 6. Run the main tool
+python main.py
+```
+
 
 ## Demo Video
 [Click here to watch the tool demo video](https://drive.google.com/file/d/1XPXzFDNAYXQR10g7PQslKZQKBmrmNhln/view?usp=sharing)
