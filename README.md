@@ -127,7 +127,7 @@ RESULTS_DIR = "os.path.join(TOOL_ROOT, "Data_Collection_Module", "raw_data"
 git clone https://github.com/<your-username>/SSTSS-GenSim-Tool.git
 
 # 2. Navigate into the project directory
-cd SSTSS-GenSim-Tool/SSTSS_GenSim_Modules
+cd SSTSS-GenSim-Tool/SSTSS_GenSim_v2
 
 # 3. Create a Python virtual environment (first time only)
 python -m venv venv
