@@ -1,0 +1,45 @@
+Starting Scenario Runner...
+pygame 1.9.6
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Not all ego vehicles ready. Waiting ... 
+Preparing scenario: FollowLeadingVehicle_1
+ScenarioManager: Running scenario FollowLeadVehicle
+[LeadVehicleController] Initialized at Location(x=127.999802, y=133.426895, z=-0.002114)
+[LeadVehicleController] Reached cruising speed smoothly: 5.56 m/s
+[LeadVehicleController] Terminated.
+[LeadVehicleController] Terminated.
+
+ ======= Results of Scenario: FollowLeadVehicle ---- TIMEOUT =======
+
+ > Ego vehicles:
+Actor(id=197, type=vehicle.lexus.utlexus); 
+
+ > Other actors:
+Actor(id=206, type=vehicle.nissan.patrol); 
+
+ > Simulation Information
+╒═════════════════════════════════╤═════════════════════╕
+│ Start Time                      │ 2025-11-27 11:22:28 │
+├─────────────────────────────────┼─────────────────────┤
+│ End Time                        │ 2025-11-27 11:22:37 │
+├─────────────────────────────────┼─────────────────────┤
+│ Duration (System Time)          │ 9.58s               │
+├─────────────────────────────────┼─────────────────────┤
+│ Duration (Game Time)            │ 20.05s              │
+├─────────────────────────────────┼─────────────────────┤
+│ Ratio (System Time / Game Time) │ 2.093s              │
+╘═════════════════════════════════╧═════════════════════╛
+
+ > Criteria Information
+╒════════════════════════╤══════════════════════╤═════════╤══════════════╕
+│ Actor                  │ Criterion            │ Result  │ Actual Value │
+├────────────────────────┼──────────────────────┼─────────┼──────────────┤
+│ lexus.utlexus (id=197) │ CollisionTest (Req.) │ SUCCESS │ 0            │
+├────────────────────────┼──────────────────────┼─────────┼──────────────┤
+│                        │ Timeout (Req.)       │ FAILURE │ 20.05        │
+╘════════════════════════╧══════════════════════╧═════════╧══════════════╛
+ ===================================================================
+
+Not all scenario tests were successful
+[LeadVehicleController] Terminated.
+No more scenarios .... Exiting

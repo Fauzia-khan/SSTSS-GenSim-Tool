@@ -1,0 +1,20 @@
+import os
+
+MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+CATALOG_SCENARIOS_PATH = os.path.join(MODULE_DIR, "catalog_scenarios.xlsx")
+FORMULATED_SCENARIOS_PATH = os.path.join(MODULE_DIR, "formulated_scenario_groups.xlsx")
+ODD_PATH = os.path.join(MODULE_DIR, "odd_selection_nested_structure.xlsx")
+USER_SELECTED_SCENARIOS_PATH = os.path.join(MODULE_DIR, "user_selected_scenarios_from_catalog.xlsx")
+FORMULATED_SCENARIO_GROUPS_PATH = os.path.join(MODULE_DIR, "formulated_scenario_groups.xlsx")
+DUPLICATE_SCENARIO_REMOVAL_PATH = os.path.join(MODULE_DIR, "duplicate_scenario_removal.xlsx")
+USER_SELECTED_ODD_PATH = os.path.join(MODULE_DIR, "user_selected_ODD.xlsx")
+SELECTED_SCENARIO_BASEDon_ODD_PATH = os.path.join(MODULE_DIR, "selected_scenario_basedon_ODD.xlsx")
+PRIORITIZED_SCENARIO_GROUPS_US_PATH = os.path.join(MODULE_DIR, "prioritized_scenario_groups_US.xlsx")
+PRIORITIZED_SCENARIO_GROUPS_EU_PATH = os.path.join(MODULE_DIR, "prioritized_scenario_groups_EU.xlsx")
+FILTERED_SCENARIOS_CARLA_PATH = os.path.join(MODULE_DIR, "selected_scenarios_Carla.xlsx")
+FILTERED_SCENARIOS_GAZEBO_PATH = os.path.join(MODULE_DIR, "selected_scenarios_Gazebo.xlsx")
+FILTERED_SCENARIOS_AUDACITY_PATH = os.path.join(MODULE_DIR, "selected_scenarios_Audacity.xlsx")
+FILTERED_SCENARIOS_LGSVL_PATH = os.path.join(MODULE_DIR, "selected_scenarios_LGSVL.xlsx")
+SELECTED_SCENARIOS_US_PATH = os.path.join(MODULE_DIR, "list_of_selected_scenarios.xlsx")
+SELECTED_SCENARIOS_EU_PATH = os.path.join(MODULE_DIR, "list_of_selected_scenarios.xlsx")
