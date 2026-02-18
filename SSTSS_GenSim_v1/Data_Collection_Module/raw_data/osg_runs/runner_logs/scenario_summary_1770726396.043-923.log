@@ -1,0 +1,16 @@
+Starting Scenario Runner...
+Not all ego vehicles ready. Waiting ... 
+Preparing scenario: FollowLeadingVehicle_1
+ScenarioManager: Running scenario FollowLeadVehicle
+[LeadVehicleController] Initialized at Location(x=125.999802, y=133.426010, z=-0.002114)
+[LeadVehicleController] Reached cruising speed smoothly: 6.27 m/s
+[LeadVehicleController] Triggering braking at 80 m!
+[LeadVehicleController] Starting braking... braking_distance=2.23 m, deceleration=8.83 m/s²
+[LeadVehicleController] Vehicle stopped. Waiting...
+[LeadVehicleController] Resuming motion.
+[LeadVehicleController] Terminated.
+[LeadVehicleController] Terminated.
+Not all scenario tests were successful
+Please run with --output for further information
+[LeadVehicleController] Terminated.
+No more scenarios .... Exiting

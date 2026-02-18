@@ -1,0 +1,10 @@
+Starting Scenario Runner...
+Not all ego vehicles ready. Waiting ... 
+Preparing scenario: FollowLeadingVehicle_1
+ScenarioManager: Running scenario FollowLeadVehicle
+[LeadVehicleController] Terminated.
+[LeadVehicleController] Terminated.
+Not all scenario tests were successful
+Please run with --output for further information
+[LeadVehicleController] Terminated.
+No more scenarios .... Exiting

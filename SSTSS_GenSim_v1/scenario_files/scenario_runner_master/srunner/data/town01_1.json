@@ -1,0 +1,31 @@
+{
+    "available_scenarios": [
+        {
+            "Town01": [
+                
+                {
+                    "available_event_configurations": [
+                        {
+                            "other_actors": {
+                                
+                            },
+                            
+                                "transform": {
+                                    "pitch": "0",
+                                    "x": "3.64",
+                                    "y": "-2.20",
+                                    "yaw": "180",
+                                    "z": "1.0"
+                                }
+                            
+                        }
+                        
+                    ],
+                    "scenario_type": "Scenario9"
+                }
+            
+            ]
+        
+    }
+]
+}

@@ -1,0 +1,27 @@
+Starting Scenario Runner...
+Traceback (most recent call last):
+  File "scenario_runner.py", line 440, in _load_and_run_scenario
+    self.manager.run_scenario()
+  File "/home/fauzia/scenario_runner/srunner/scenariomanager/scenario_manager.py", line 136, in run_scenario
+    self._tick_scenario(timestamp)
+  File "/home/fauzia/scenario_runner/srunner/scenariomanager/scenario_manager.py", line 175, in _tick_scenario
+    self.scenario_tree.tick_once()
+  File "/home/fauzia/.local/lib/python3.8/site-packages/py_trees/behaviour.py", line 158, in tick_once
+    for unused in self.tick():
+  File "/home/fauzia/.local/lib/python3.8/site-packages/py_trees/composites.py", line 578, in tick
+    for node in child.tick():
+  File "/home/fauzia/.local/lib/python3.8/site-packages/py_trees/composites.py", line 494, in tick
+    for node in child.tick():
+  File "/home/fauzia/.local/lib/python3.8/site-packages/py_trees/composites.py", line 494, in tick
+    for node in child.tick():
+  File "/home/fauzia/.local/lib/python3.8/site-packages/py_trees/behaviour.py", line 247, in tick
+    self.initialise()
+  File "/home/fauzia/scenario_runner/srunner/scenarios/follow_leading_vehicle.py", line 104, in initialise
+    self._initial_location = self.lead_vehicle.get_location()
+AttributeError: 'NoneType' object has no attribute 'get_location'
+Preparing scenario: FollowLeadingVehicle_1
+WARNING: Cannot spawn actor vehicle.nissan.patrol at position Location(x=109.999817, y=133.418732, z=0.500000)
+ScenarioManager: Running scenario FollowLeadVehicle
+'NoneType' object has no attribute 'get_location'
+[LeadVehicleController] Terminated.
+No more scenarios .... Exiting
