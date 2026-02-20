@@ -11,7 +11,8 @@ It streamlines the entire workflow, from scenario selection and implementation t
 ## GUI for the Scenario Selection Module
 
 <p align="center">
-  <img src="SSTSS_GenSim_v1/images/Main_WIndow.png" alt="Main Window" width="600">  
+  <img src="SSTSS_GenSim_v1/scenario_selection.png" alt="Main Window" width="600">  
+  
 </p>
 
 ## Workflow 
