@@ -2,8 +2,8 @@
 
 
 
-# SSTSS-GenSim Tool
-SSSTSS-GenSim is a modular end-to-end pipeline for scenario-based safety testing of Automated Driving Systems (ADS).
+# SafeBound Tool
+SafeBound is a modular end-to-end pipeline for scenario-based safety testing of Automated Driving Systems (ADS).
 It streamlines the entire workflow, from scenario selection and implementation to configuration, simulation, data collection, safety evaluation, and the generation of visualization and simulation summary reports.
 
 ---
@@ -30,7 +30,7 @@ iv. **Select Simulator** – Choose the simulator.(Currently, you can select CAR
 
 _Output._ --> Final list of Test Scenarios.xlsx
 
-**2. ** Scenario Implementation Module:** Converts the top-prioritized scenario into a Python script that defines the actors and their corresponding behaviors. <br>
+**2. **Scenario Implementation Module:** Reads the scenario group tag of the selected scenario, maps it to an appropriate template provided by the ScenarioRunner framework, and converts it into an executable format compliant with the ASAM OpenSCENARIO standard. <br>
 _Output_ --> (<scenarioname.py>)
 
 **3. Scenario Configuration Module:** Configures the simulation environment and applies the selected input parameters in <scenario_name.py>. <br>
@@ -107,7 +107,7 @@ Set the root path inside config.py:
 SCENARIO_RUNNER_ROOT = "/home/user/scenario_runner"
 
 ```
-5. Configure SSTSS-GenSim Tool Paths
+5. Configure SafeBound Tool Paths
 
 Edit config.py inside the tool:
 ```bash
