@@ -53,7 +53,7 @@ _Output_ --> (<scenario_name_metrice.png>)  and _Output_ --> (<scenarioname_summ
 
 
 ## Requirements
-The SSTSS-GenSim Tool requires a Linux-based environment with ROS and a supported simulator. The recommended Supported Operating System is Ubuntu 20.04 LTS (recommended).
+The SafeBound Tool requires a Linux-based environment with ROS and a supported simulator. The recommended Supported Operating System is Ubuntu 20.04 LTS (recommended).
 Windows is not supported because key components (Autoware_mini) do not run natively on Windows.
 
 
@@ -120,7 +120,7 @@ RESULTS_DIR = "os.path.join(TOOL_ROOT, "Data_Collection_Module", "raw_data"
 
 
 
-### 4. SSTSS-GenSim-Tool Installation
+### 4. SafeBound-Tool Installation
 ### 1. Clone the Repository
 ```bash
 
